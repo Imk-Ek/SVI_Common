@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>fmNaladka</class>
+ <widget class="QMainWindow" name="fmNaladka">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>463</width>
+    <height>319</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>СВП Ормет - режим наладки</string>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AnimatedDocks</set>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <widget class="QPushButton" name="tbPort">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>91</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Открыть порт</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tbDataBase">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>База номеров модулей</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spbPortNumber">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>20</y>
+      <width>42</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tbSearchModuls">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Поиск модулей</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tbV">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>20</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Вольтметр</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tbT">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>60</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Термометр</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tbA">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>100</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Амперметр</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tbP">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>140</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Измеритель давления</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tbC">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>180</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Кондуктометр</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tbADC">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>140</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>АЦП</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tbWinb">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>180</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Winb</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>463</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="muDebug">
+    <property name="title">
+     <string>Отладка</string>
+    </property>
+    <addaction name="actPortCons"/>
+    <addaction name="actMBCons"/>
+    <addaction name="actAD779x"/>
+   </widget>
+   <widget class="QMenu" name="muSetting">
+    <property name="title">
+     <string>Настройка</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="muVInstr">
+    <property name="title">
+     <string>Виртуальные приборы</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="muPar">
+    <property name="title">
+     <string>Параметризация</string>
+    </property>
+    <addaction name="actParV"/>
+    <addaction name="actParT"/>
+    <addaction name="actParCond"/>
+    <addaction name="actParTP"/>
+   </widget>
+   <widget class="QMenu" name="muAbout">
+    <property name="title">
+     <string>?</string>
+    </property>
+   </widget>
+   <addaction name="muDebug"/>
+   <addaction name="muPar"/>
+   <addaction name="muVInstr"/>
+   <addaction name="muSetting"/>
+   <addaction name="muAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actPortCons">
+   <property name="text">
+    <string>Консоль порта...</string>
+   </property>
+  </action>
+  <action name="actMBCons">
+   <property name="text">
+    <string>Консоль драйвера ...</string>
+   </property>
+  </action>
+  <action name="actAD779x">
+   <property name="text">
+    <string>AD779x...</string>
+   </property>
+  </action>
+  <action name="actParV">
+   <property name="text">
+    <string>Милливольтметр</string>
+   </property>
+  </action>
+  <action name="actParT">
+   <property name="text">
+    <string>Термометр</string>
+   </property>
+  </action>
+  <action name="actParCond">
+   <property name="text">
+    <string>Кондуктометр</string>
+   </property>
+  </action>
+  <action name="actParTP">
+   <property name="text">
+    <string>Измеритель давления</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

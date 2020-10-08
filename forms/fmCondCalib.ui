@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>fmCondCalib</class>
+ <widget class="QMainWindow" name="fmCondCalib">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>403</width>
+    <height>208</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Градуировка</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QToolButton" name="tbCalib">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>62</y>
+      <width>341</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Сохранить</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbElecAdd">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>122</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>+</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cbElec">
+    <property name="geometry">
+     <rect>
+      <x>18</x>
+      <y>128</y>
+      <width>311</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leElec">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>122</y>
+      <width>311</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_31">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>94</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="lineWidth">
+     <number>-5</number>
+    </property>
+    <property name="text">
+     <string>Профиль измерения</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_28">
+    <property name="geometry">
+     <rect>
+      <x>26</x>
+      <y>12</y>
+      <width>41</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="lineWidth">
+     <number>-5</number>
+    </property>
+    <property name="text">
+     <string>К&lt;sub&gt;яч&lt;/sub&gt;=</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="leKu">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>10</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="singleStep">
+     <double>0.010000000000000</double>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>403</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="muProf">
+    <property name="title">
+     <string>Профиль</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="muTabl">
+    <property name="title">
+     <string>Таблица</string>
+    </property>
+   </widget>
+   <addaction name="muProf"/>
+   <addaction name="muTabl"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actTIns">
+   <property name="text">
+    <string>Вставить строку</string>
+   </property>
+  </action>
+  <action name="actTDel">
+   <property name="text">
+    <string>Удалить строку</string>
+   </property>
+  </action>
+  <action name="actPrIns">
+   <property name="text">
+    <string>Новый профиль</string>
+   </property>
+  </action>
+  <action name="actPrDel">
+   <property name="text">
+    <string>Удалить профиль</string>
+   </property>
+  </action>
+  <action name="actPrRen">
+   <property name="text">
+    <string>Переименовать профиль</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

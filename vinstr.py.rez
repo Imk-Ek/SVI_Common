@@ -1,0 +1,1040 @@
+﻿# -*- coding: utf-8 -*-
+
+import sys, traceback
+
+from PyQt4 import QtCore, QtGui 
+from fpVolt import Ui_fpVolt
+from fpTemp import Ui_fpTemp
+from fpIon import Ui_fpIon
+from fmICalib import Ui_fmICalib
+
+from common import *
+
+# ---------------------------------------------- 
+#        Локальные ф-ии
+
+def safeDget(d, key, a_def):
+  """ ф-ия возвращает значение ключа из словаря d или
+           значение a_def при отсутсвии ключа в словаре """
+  try:
+    res = d[key]
+  except:
+    res = a_def
+    # TODO логирование 
+  return res 
+
+# ---------------------------------------------- 
+#        Классы
+
+#---
+class CfmICalib(QtGui.QMainWindow, Ui_fmICalib): 
+  """ окно калибровки виртуального иономера (характеризация электродов) """
+  #    PrD - словарь доступных профилей (key: наименование; value: экземпляр CIProf)
+  #    actPr  - активный редактируемый профиль (КОПИЯ экземпляра CIProf из словаря PrD) 
+  #             (устанавливается в PrD ПОСЛЕ завершения расчетов)
+  #    fNewPr - True - редактируемый профиль НОВЫЙ (т.е. не нужно удалять старый из словаря как при редактировании)
+  #    vIon   - виртуальный иономер, к которому подключена калибруемая электродная пара
+  #    pXcol  - список содержщий колонку pX (ключи в pXdict редактируемого профиля)
+  #    formpX - строка форматирования под pX (под НОВЫЙ метод format)
+  #    formE  - строка форматирования под напряжение (под НОВЫЙ метод format)
+  #    menuT  - контекстное меню калибровочной таблицы
+  #    menuC  - контекстное меню выпадающего списка профилей
+  #    hint   - ролевой код доп. данных в элементе-заголовке строки калибровочной таблицы
+  #    fFreeze - True - отключить обработку событий калибровочной таблицы и выпадающего списка профилей
+  #    lastPrName - наименование ПРЕДЫДУЩЕГО редактируемого профиля
+  #    lastPrInd  - индекс в выпадающем списке ПРЕДЫДУЩЕГО редактируемого профиля
+  #    stPrEd - состояние редактирования профиля:
+  #              0 - отсутствуют какие-либо операции с наименованием профиля
+  #              1 - редактируется наименование активного профиля
+  #              2 - создается наименование нового профиля   
+
+  def __init__(self):
+     
+    super().__init__()
+    self.setupUi(self)
+
+    self.formpX = "{:5.2f}" 
+    self.formE = "{:6.1f}"
+    self.hint = QtCore.Qt.UserRole + 1 
+    self.fFreeze = False
+    self.lastPrInd = -1
+    self.lastPrName = '' 
+    self.stPrEd = 0
+    self.fNewPr = False
+    self.leElec.setHidden(True)  # строка редактирования наименования профиля
+
+    # меню наименования профиля (всплывающее и выпадающее)
+    self.menuC = QtGui.QMenu(self)
+    self.menuC.addAction(self.actPrIns)
+    self.muProf.addAction(self.actPrIns)
+    self.menuC.addAction(self.actPrRen)
+    self.muProf.addAction(self.actPrRen)
+    self.menuC.addSeparator()
+    self.muProf.addSeparator()
+    self.menuC.addAction(self.actPrDel) 
+    self.muProf.addAction(self.actPrDel)
+    self.cbElec.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)  
+    self.cbElec.customContextMenuRequested.connect(self.on_cbElec_menu) 
+
+    # меню калибровочной таблицы (всплывающее и выпадающее)
+    self.menuT = QtGui.QMenu(self)
+    self.menuT.addAction(self.actTIns)
+    self.muTabl.addAction(self.actTIns) 
+    self.menuT.addSeparator()
+    self.muTabl.addSeparator()
+    self.menuT.addAction(self.actTDel)
+    self.muTabl.addAction(self.actTDel)
+    self.teCalib.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)    
+    self.teCalib.customContextMenuRequested.connect(self.on_teCalib_menu)
+
+    self.teCalib.itemChanged.connect(self.on_teCalib_changed)
+
+    self.lepXu.editingFinished.connect(self.on_lepXuFinish)
+    self.tbCalib.clicked.connect(self.on_tbCalib_toggle)
+    self.actTIns.triggered.connect(self.on_actTIns_toggle)
+    self.actTDel.triggered.connect(self.on_actTDel_toggle)    
+
+    self.cbElec.currentIndexChanged.connect(self.on_cbElec_changed)
+    
+    self.leElec.editingFinished.connect(self.on_leElecFinish)
+    self.actPrIns.triggered.connect(self.on_actPrIns_toggle)
+    self.actPrRen.triggered.connect(self.on_actPrRen_toggle)
+    self.actPrDel.triggered.connect(self.on_actPrDel_toggle)
+    self.tbElecAdd.clicked.connect(self.on_actPrIns_toggle) 
+ 
+ 
+  def  profSM(self, newState = 0, name = ''):
+    """ автомат изменения профилей 
+         newState - код нового состояния stPrEd (см. список вначале)
+         name     - наименование (интерпретируется в зависимости от состояния) """  
+   
+    #--- переходы между состояниями, контроль допустимости и отработка
+    if self.stPrEd == 1:  # редактируется наименование активного профиля
+      if newState == 0:   # команда на завершение редактирования 
+        self.fNewPr = False
+        self.actPr.Name = name 
+        self.cbElec.setItemText(self.cbElec.currentIndex(), name)
+      else:  return         # остальные игнорируются
+
+    elif self.stPrEd == 2: # создается наименование нового профиля   
+      if newState == 0:   # команда на завершение редактирования 
+        self.fNewPr = True
+        prof = CIProf(self.actPr.getICont())   # для упрощения дублирования - новый профиль создается как копия текущего
+        prof.Name = name 
+        self.actPr = prof
+        self.cbElec.addItem(name)
+        self.fFreeze = True
+        self.cbElec.setCurrentIndex(self.cbElec.count() - 1)  # новый добавляется в конец списка
+        self.fFreeze = False         
+        self.ClTbl_draw(self.actPr)
+      else:  return         # остальные игнорируются 
+      
+    else:  # отсутствуют какие-либо операции
+      if newState == 1:   ed_name = self.actPr.Name  # редактируется наименование активного профиля
+      elif newState == 2: ed_name = self.actPr.getNewName()  # создается наименование нового профиля 
+      else:  return # новое состояние отсутствует 
+      
+    self.stPrEd = newState  # переход в новое состояние 
+
+    #--- общая часть отработок переходов 
+    if newState:  # редактируется или создается наименование активного профиля
+      self.cbElec.setEnabled(False)
+      self.cbElec.setHidden(True)
+      self.leElec.setText(ed_name)
+      self.leElec.setEnabled(True)
+      self.leElec.setHidden(False)  
+      self.leElec.setFocus()
+ 
+    else:         # отсутствуют какие-либо операции с наименованием профиля  (завершение)
+      self.leElec.setEnabled(False)
+      self.leElec.setHidden(True)
+      self.cbElec.setEnabled(True)
+      self.cbElec.setHidden(False) 
+
+
+  def ClTbl_draw(self, pr):
+    """ отрисовка профиля pr (экземпляр CIProf) в калибровочной таблице teCalib + подготовка к редактированию """
+    self.pXcol = sorted(pr.pXdict)
+    pXsize = len(self.pXcol)
+    if pXsize:
+      self.fFreeze = True # "заморозка" на время заполнения таблицы    
+      # извлекаем данные из профиля в таблицу
+      if self.teCalib.rowCount() != pXsize:  self.teCalib.setRowCount(pXsize)
+      for row in range(pXsize): 
+        if not self.teCalib.verticalHeaderItem(row):
+          head = QtGui.QTableWidgetItem("")
+          self.teCalib.setVerticalHeaderItem(row, head)
+        else: 
+          head = self.teCalib.verticalHeaderItem(row)
+ 
+        head.setText(str(row + 1))
+        head.setData(self.hint, row) # хинт для связи с pXcol -> pXdict, независимый от вставки новых незаполненных строк
+
+        if not self.teCalib.item(row, 0):  self.teCalib.setItem(row, 0, QtGui.QTableWidgetItem(""))
+        self.teCalib.item(row, 0).setText((self.formpX.format(self.pXcol[row])))  # pX
+
+        if not self.teCalib.item(row, 1):  self.teCalib.setItem(row, 1, QtGui.QTableWidgetItem(""))
+        self.teCalib.item(row, 1).setText(self.formE.format(1000 * pr.pXdict[self.pXcol[row]][0]))  # E [мВ]
+
+        self.teCalib.setItem(row, 2, QtGui.QTableWidgetItem("")) # Отклонение
+      self.fFreeze = False 
+    self.teCalib.resizeColumnsToContents()
+
+
+  def show(self, profD, actPr, vIon): 
+    """ profD - словарь доступных профилей
+        actPf - калибруемый профиль (value из profD)
+        vIon  - виртуальный иономер, открывший данное окно калибровки   """
+
+    self.PrD = profD 
+    self.actPr = CIProf(actPr.getICont())  # работаем с КОПИЕЙ
+    self.vIon = vIon
+    self.fFreeze = True
+    self.cbElec.clear()
+    indc = 0  # хинт для связи CIProf и строки выпадающего списка в окне калибровки
+    for name in self.PrD:
+      self.cbElec.addItem(name)
+      self.PrD[name].extdict['indc'] = indc
+      indc = indc + 1
+    self.cbElec.setCurrentIndex(actPr.extdict['indc'])  
+    self.fFreeze = False 
+  
+    if not self.actPr.pXdict:
+      # калибровочная таблица в профиле отсутствует - создаем по-умолчанию
+      self.actPr.pXdict[4.01] = self.actPr.getEmptyDVal()
+      self.actPr.pXdict[6.86] = self.actPr.getEmptyDVal()
+      self.actPr.pXdict[9.18] = self.actPr.getEmptyDVal() 
+
+    self.ClTbl_draw(self.actPr)
+
+    self.lepXu.setText(self.formpX.format(self.actPr.pXu)) # pXи 
+    self.leZero.setText(self.formE.format(self.actPr.Ecm)) # Ecm
+
+    super().show()
+
+
+  #def createPopupMenu(self):
+  #  print("createPopupMenu !!!")
+  #
+  #  return None
+
+  def on_teCalib_menu(self, pos):
+    #print("on_teCalib_menu [pos={}] !!!".format(pos))
+    self.menuT.popup(self.teCalib.mapToGlobal(pos)) 
+
+
+  def on_cbElec_menu(self, pos):
+    self.menuC.popup(self.cbElec.mapToGlobal(pos))
+
+
+  def on_lepXuFinish(self):
+    try:
+      self.actPr.pXu  = eval(self.lepXu.text(), {}, {})
+    except:
+      print(sys.exc_info())   # TODO логирование
+    self.lepXu.setText(self.formpX.format(self.actPr.pXu))
+    self.lepXu.clearFocus()
+
+
+  def on_tbCalib_toggle(self):
+    """ расчет калибровочных коэффициентов """
+    for key in sorted(self.actPr.pXdict):
+      print("pX = {} \t {}".format(key, self.actPr.pXdict[key]))
+
+    # нахождение Ecm и S методом наименьших квадратов
+    pX_acc = 0
+    E_acc = 0
+    pXE_acc = 0
+    pX2_acc = 0
+    for pX, val in self.actPr.pXdict.items():
+      pX_acc += pX  
+      E_acc += val[0]
+      pXE_acc += pX * val[0]
+      pX2_acc += pX * pX 
+
+    N = len(self.actPr.pXdict)    
+    pX_av = pX_acc / N
+    E_av = E_acc / N
+    S = (pXE_acc / N) - (pX_av * E_av)  
+    S = S / ((pX2_acc / N) - (pX_av * pX_av))
+    E0 =  E_av - (S * pX_av)
+     
+    T = self.vIon.workT
+
+    print("E0 = {}  S = {}  T = {}".format(E0, S, T))
+    self.ClTbl_draw(self.actPr)
+
+    # расчет отклонений для каждой калибровочной точки в таблице
+    self.fFreeze = True
+    for row in range(self.teCalib.rowCount()):
+      head = self.teCalib.verticalHeaderItem(row)
+      if (head.text() != "-") and (head.data(self.hint) != None):
+        pX_tst = self.pXcol[head.data(self.hint)]
+        Offs = E0 + (S * pX_tst) - self.actPr.pXdict[pX_tst][0]
+        self.teCalib.item(row, 2).setText(self.formE.format(1000 * Offs))  # Отклонение [мВ]
+
+    self.fFreeze = False
+
+    # перенос в профиль - c пересчетом к изопотенциальной точке 
+    #(МНК привел к виду E = E0 + S * pX)
+    self.actPr.Ecm = E0 + S * self.actPr.pXu
+    self.actPr.Tcb = T
+    self.actPr.Stc = -S - (self.actPr.Kt * T)    
+  
+    print("pXu = {}".format( self.actPr.pXu)) 
+    print("Ecm = {}  Stc = {}  Kt = {} ".format(self.actPr.Ecm, self.actPr.Stc, self.actPr.Kt)) 
+
+    # перенос профиля в словарь и установка активным в иономер
+    self.PrD[self.actPr.Name] = self.actPr  
+    # если наименование не изменилось, то профиль из словаря не будет удален (контроль внутри метода SelectPr)
+    self.vIon.SelectPr(self.actPr.Name, True, not self.fNewPr) 
+
+
+  def on_actTIns_toggle(self):
+    #print("on_actTIns_toggle !!!")
+    cur_row = self.teCalib.currentRow()
+    self.teCalib.insertRow(cur_row) 
+
+    self.fFreeze = True
+    if not self.teCalib.verticalHeaderItem(cur_row):  
+      self.teCalib.setVerticalHeaderItem(cur_row, QtGui.QTableWidgetItem("-"))
+    else: 
+      self.teCalib.verticalHeaderItem(cur_row).setText("-")
+
+    if not self.teCalib.item(cur_row, 0):
+      self.teCalib.setItem(cur_row, 0, QtGui.QTableWidgetItem(""))  # pX
+ 
+    if not self.teCalib.item(cur_row, 1): 
+      self.teCalib.setItem(cur_row, 1, QtGui.QTableWidgetItem(""))  # E [мВ]
+     
+    if not self.teCalib.item(cur_row, 2): 
+      self.teCalib.setItem(cur_row, 2, QtGui.QTableWidgetItem(""))  # Отклонение 
+    self.fFreeze = False 
+
+
+  def on_actTDel_toggle(self):
+    #print("on_actTDel_toggle !!!")  
+    cur_row = self.teCalib.currentRow()
+    head = self.teCalib.verticalHeaderItem(cur_row)
+    if (head.text() != "-") and (head.data(self.hint) != None):
+      pX = self.pXcol[head.data(self.hint)]
+      del self.pXcol[head.data(self.hint)]
+      del self.actPr.pXdict[pX]  
+
+    self.teCalib.removeRow(cur_row)
+    self.ClTbl_draw(self.actPr)
+
+
+  def on_teCalib_changed(self, item):
+    #print("on_teCalib_changed ({},{}) text='{}'".format(item.row(), item.column(), item.text()))
+    if not self.fFreeze: 
+      #print("item={}".format(item))
+    
+      try:
+        res = eval(item.text(), {}, {})
+      except:
+        print(sys.exc_info())   # TODO логирование
+
+      head = self.teCalib.verticalHeaderItem(item.row())
+      #print("head hint = {}".format(head.data(self.hint))) 
+      if (head.data(self.hint) == None) or (head.text() == "-"):
+        # идет редактирование новой строки
+        if item.column() == 0:
+          # pX 
+          newV = self.actPr.getEmptyDVal()
+          try:
+            # перенос остальных колонок 
+            for i in range(len(newV)):
+              tmpI = self.teCalib.item(item.row(), i + 1)
+              if tmpI:
+                data = eval(tmpI.text(), {}, {})
+                newV[i] = data
+          except:
+            excI = sys.exc_info() 
+            print(excI)   # TODO логирование
+            traceback.print_tb(excI[2]) 
+
+          self.actPr.pXdict[res]  = newV
+          self.ClTbl_draw(self.actPr) 
+
+        else:
+          # все остальные колонки будут перенесены в профиль ПОСЛЕ ввода колонки pX
+          pass
+      else:
+        # редактируемая строка уже есть в профиле
+        old_pX = self.pXcol[head.data(self.hint)]
+        #print("old_pX = {} res = {}".format(old_pX, res)) 
+
+        if item.column() == 0:
+          # pX
+          oldV = self.actPr.pXdict.pop(old_pX)
+          self.actPr.pXdict[res] = oldV
+          self.pXcol[head.data(self.hint)] = res  # TODO - контроль необходимости пересортировки
+
+        elif item.column() == 1:
+          # напряжение (в таблице [мВ], в профиле [B])
+          self.actPr.pXdict[old_pX][item.column() - 1] = res / 1000  
+
+        else:
+          # все остальные колонки
+          self.actPr.pXdict[old_pX][item.column() - 1] = res
+    else:
+      #print("freezed !")    
+      pass 
+
+
+  def on_cbElec_changed(self, ind):
+    print("<fmCalib> cbElec_changed [ind={}; fFreeze={}] !!!".format(ind, self.fFreeze)) 
+
+    #--- отслеживание неполностью сформированного профиля (который пользователь "бросил" и затем начал новый)
+    if self.lastPrInd != -1:
+      if self.lastPrName not in self.PrD:
+        # предыдущий профиль пользователь "бросил" - удаляем его из списка
+        tmp = self.lastPrInd  
+        self.lastPrInd = -1
+        self.cbElec.removeItem(tmp) 
+
+    self.lastPrInd = ind 
+    self.lastPrName = self.cbElec.currentText()
+
+    if not self.fFreeze:
+      self.actPr = CIProf(self.PrD[self.cbElec.currentText()].getICont()) # работаем с КОПИЕЙ
+      self.ClTbl_draw(self.actPr)
+
+ 
+  def on_leElecFinish(self):
+    print("on_leElecFinish !!!")
+    self.profSM(0, self.leElec.text())
+
+
+  def on_actPrIns_toggle(self):
+    self.profSM(2)
+
+
+  def on_actPrRen_toggle(self):
+    self.profSM(1)
+
+
+  def on_actPrDel_toggle(self):
+    pass
+
+
+
+class CIProf:
+  """ профиль иономера (по-сути профиль электрода для пересчета данных первичных измерителей в pX) 
+  
+       E = Ecm - S(pX - pXu)
+ 
+           Ecm - ЭДС смещения электродной пары (для ионселективных в общем виде зависит от температуры) [B]
+                 <уточняется при калибровке>
+           S   - крутизна электродной характеристики (см. далее)
+           pX  - pX фактор измеряемой пробы
+           pXu - pH изопотенциальной точки (необходим для активной термокоррекции - паспортный параметр)
+                 для единообразия расчетов с термокоррекцией и без нее, если pXu неизвестен - 
+                 принимаем его за 7.0
+
+       S = Stc + Kt * t
+
+           t   - температура измеряемой пробы [градусы Цельсия]
+           Stc - изотермическая крутизна электродной характеристики (при t = const) 
+                 (теоретическая для pH = 0.054153) - <уточняется при калибровке>
+           Kt  - температурный коэф-т крутизны 
+                 (теоретический для pH = 1.9836e-4)
+
+       Tcb  - температура при которой выполнена калибровка (необходима для отключения термокоррекции)
+       Name - наименование профиля
+
+       pXdict - калибровочная таблица - словарь (key - pX; value - список с остальными колонками в таблице teCalib)
+
+       extdict - словарь с дополнительными параметрами для установки\использования извне (не сохраняется в инициализационном контейнере)
+  """ 
+  cnt = 1  # статический счетчик для генерации разных Name по-умолчанию
+
+  def __init__(self, iniCont = {} ):
+    """ iniCont - инициализационный контейнер (словарь),
+                  если он не задан - то профиль создается с параметрами по-умолчанию """
+
+    self.Ecm = safeDget(iniCont, 'Ecm', 0)
+    self.Stc = safeDget(iniCont, 'Stc', 0.054153)
+    self.Kt = safeDget(iniCont, 'Kt', 1.9836e-4)
+    self.pXu = safeDget(iniCont, 'pXu', 7.0)
+    self.Tcb = safeDget(iniCont, 'Tcb', 20)
+    self.pXdict = safeDget(iniCont, 'pXdict', {})
+    self.extdict = {}
+
+    if 'Name' in iniCont:  self.Name = iniCont['Name']
+    else:                  self.Name = self.getNewName() 
+      
+
+  def Calc(self, U, T):
+    """ метод возвращает pX(U,T) где U [B], T [град Цельсия]
+        TODO - "отстрел" исключений при выходе за допустимый диапазон """ 
+
+    pX = self.pXu + (self.Ecm - U)/(self.Stc + (self.Kt * T))
+
+    return pX  
+
+
+  def getTCb(self):
+    """ метод возвращает температуру на которой была выполнена калибровка
+        (вызов Calc c данной температурой отключает термокоррекцию) """
+    # TODO    
+    return self.Tcb
+
+
+  def getICont(self):
+    """ метод возвращает инициализационный контейнер (словарь), соответствующий текущему состоянию профиля """
+    iniCont = {} 
+    iniCont['Name'] = self.Name
+    iniCont['Ecm'] = self.Ecm
+    iniCont['Stc'] = self.Stc 
+    iniCont['Kt'] = self.Kt
+    iniCont['pXu'] = self.pXu 
+    iniCont['Tcb'] = self.Tcb
+    if len(self.pXdict): 
+      # т.к. значениями словаря являются списки - простым copy() тут не отделацца
+      td = {}
+      for key, val in self.pXdict.items():
+        td[key] = val.copy()
+      iniCont['pXdict'] = td    
+
+    return iniCont
+
+
+  def getEmptyDVal(self):
+    """ метод возвращает пустую строку калибровочной таблицы ( value словаря pXdict)"""
+    return [0]  # пока сохраняем только напряжение (ЭДС электродной пары)
+
+
+  def getNewName(self):
+    """ метод возвращает новое уникальное для всех классов IProf наименование """
+    res = "Электрод{}".format(self.cnt)
+    self.cnt = self.cnt+1
+
+    return res
+
+#---
+
+class CVInstr:
+  """ базовая часть виртуального прибора """
+  # win - экземпляр окна - лицевой панели (создается потомком)
+  # fFirstShow - True - первое отображение лицевой панели ("костыль" для восстановления сохраненной геометрии)
+  # dictCfg - словарь-дескриптор виртуального прибора (связанный с vinstrD)
+  # dictState - словарь сохраняемых при выключении переменных\параметров
+  # fTech - True - запуск в технологическом режиме
+  
+  def __init__(self, dcfg, dstate = {}, fTech = False):
+    self.win = None
+    self.fFirstShow = True
+    self.dictCfg = dcfg
+    self.dictState = dstate
+    self.fTech = fTech
+
+ 
+  def LoadState(self, dstate  = None):
+    """ загрузить в словарь сохраняемых параметров dstate и применить эти параметры """
+    if dstate:  self.dictState.update(dstate) 
+    if self.win: 
+      # восстанавливаем расположение и габариты лицевой панели с контролем выхода за границы экрана 
+      desktop = QtGui.QApplication.desktop() 
+      dh = desktop.height()
+      dw = desktop.width() 
+      winR = self.win.geometry()
+      rect = QtCore.QRect()
+       
+      rect.setWidth(safeDget(self.dictState, "win.width", winR.width())) 
+      rect.setHeight(safeDget(self.dictState, "win.height", winR.height()))
+
+      tmp = safeDget(self.dictState, "win.left", dw << 1)
+      if (tmp > dw):  tmp = (dw >> 1) - (rect.width() >> 1)
+      rect.setLeft(tmp)         
+
+      tmp = safeDget(self.dictState, "win.top", dh << 1)
+      if (tmp > dh):  tmp = (dh >> 1) - (rect.height() >> 1)
+      rect.setTop(tmp)  
+  
+      self.win.setGeometry(rect)
+      #self.win.setWindowTitle(self.dictCfg["наименование"])  
+
+    #super().LoadState()
+
+
+  def SaveState(self):
+    """ сохранить параметры в dictState """ 
+    if self.win:
+      #rect = self.win.frameGeometry()
+      rect = self.win.geometry()
+      self.dictState["win.left"] = rect.left()
+      self.dictState["win.top"] = rect.top()
+      self.dictState["win.width"] = rect.width() 
+      self.dictState["win.height"] = rect.height()
+
+    #super().SaveState()
+
+
+  def ShowFP(self):
+    """ отобразить лицевую панель """
+    if self.fFirstShow: 
+      self.fFirstShow = False
+      if ("win.width" in self.dictState) and ("win.height" in  self.dictState):
+        self.win.show(QtCore.QSize(self.dictState["win.width"], self.dictState["win.height"])) 
+      else:
+        self.win.show()
+    else:
+      self.win.show()
+
+
+  def NewData(self, ddata):
+    """ метод - приемник новых данных от измерителей, связанных с данным виртуальным прибором 
+          ddict - словарь (key - наименование измерительного канала; значение - (ChanID, данные, время измерения))
+        метод должен быть определен в классе - потомке  """
+ 
+    pass 
+
+#---
+class CVolt(CVInstr):
+  """ виртуальный вольтметр [В]"""
+  #  measN - наименование измерительного канала, связанного с данным экземпляром вольтметра
+  #  widthD - суммарное кол-во выводимых знаков результата (БЕЗ учета запятой)
+  #  precD  - кол-во знаков после запятой 
+  #  formS  - строка форматирования для вывода результата (под НОВЫЙ метод format)
+
+  def __init__(self, dcfg, dstate = {}, fTech = False):
+    super().__init__(dcfg, dstate, fTech)
+    # TODO обработку ошибок конфигурации
+    self.measN = self.dictCfg["каналН"]
+    self.dictCfg["meas"] = [self.measN] # фактически вносится в vinstrD
+
+    self.widthD = 6 # 4
+    self.precD = 4  # 3
+    self.formS = "{:"+str(self.widthD)+"."+str(self.precD)+"f}"
+
+    self.win = CfpVolt(self.widthD + 1, self)
+    self.LoadState()
+
+
+  def LoadState(self):
+    super().LoadState()
+
+
+  def SaveState(self):
+    super().SaveState()
+
+
+  def NewData(self, ddata):
+    if self.measN in ddata:
+      self.win.lcdVolt.display(self.formS.format(ddata[self.measN][1]))
+
+#---
+class CfpVolt(QtGui.QMainWindow, Ui_fpVolt):
+  """ лицевая панель виртуального вольтметра  
+        vVolt  - экземпляр виртуального вольтметра, соответствующий данной панели
+        basePS - (pointSize, height) базовая связка для масштабирования наименования физ-величины (llData)  
+     """
+      
+  def __init__(self, numDigits, vVolt):
+    """ numDigits - суммарное кол-во выводимых знаков результата (C учетом запятой) """
+    super(CfpVolt, self).__init__() 
+    self.setupUi(self)
+    self.vVolt = vVolt
+
+    self.basePS = None
+    self.lcdVolt.setDigitCount(numDigits)
+
+
+  def show(self, newsize = None):
+    """ newsize - экземпляр QSize для передачи новых размеров окна """
+    super().show()   # важно выполнить ПЕРЕД resize - иначе resize может не пройти
+    if newsize:  self.resize(newsize)
+
+
+  def closeEvent(self, event):
+    self.vVolt.SaveState()
+    event.accept() 
+
+
+  def resizeEvent(self, event):
+    rect = self.centralwidget.geometry()
+    font = self.llData.font()
+    fm = QtGui.QFontMetrics(font) 
+    textH = fm.boundingRect(self.llData.text()).height()
+
+    # print("layout.height = {} text.height = {} pointS = {}".format(rect.height(), textH, font.pointSize()))
+
+    if self.basePS:
+      # базовое значение уже зафиксировано - масштабируем 
+      delta = rect.height() - textH
+      if delta > 2 * self.basePS[1]:   deltaPS = 1
+      elif delta < 1.5 * self.basePS[1]: deltaPS = -1  
+      else:                              deltaPS = 0
+
+      if deltaPS:
+        font.setPointSize(font.pointSize() + deltaPS)
+        self.llData.setFont(font)               
+
+    else:    
+      # первая отрисовка лицевой панели - захватываем базовые размеры для последующего масштабирования
+      # TODO - проверить не повлияет ли стартовое восстановление прошлой геометрии окна
+      self.basePS = (font.pointSize(), rect.height() - textH)  
+
+    super().resizeEvent(event)
+
+ 
+#---
+class CTemp(CVInstr):
+  """ виртуальный термометр [°C] """
+  #  measT - наименование измерительного канала, связанного с данным экземпляром термометра
+  #  widthD - суммарное кол-во выводимых знаков результата (БЕЗ учета запятой)
+  #  precD  - кол-во знаков после запятой 
+  #  formS  - строка форматирования для вывода результата (под НОВЫЙ метод format)
+
+  def __init__(self, dcfg, dstate = {}, fTech = False):
+    super().__init__(dcfg, dstate, fTech)
+    # TODO обработку ошибок конфигурации
+    self.measT = self.dictCfg["каналТ"]
+    self.dictCfg["meas"] = [self.measT] # фактически вносится в vinstrD
+
+    self.widthD = 5
+    self.precD = 2
+    self.formS = "{:"+str(self.widthD)+"."+str(self.precD)+"f}"
+
+    self.win = CfpTemp(self.widthD + 1, self)
+    self.LoadState()
+
+
+  def LoadState(self):
+    super().LoadState()
+
+
+  def SaveState(self):
+    super().SaveState()
+
+
+  def NewData(self, ddata):
+    if self.measT in ddata:
+      self.win.lcdTemp.display(self.formS.format(ddata[self.measT][1]))
+
+#---
+class CfpTemp(QtGui.QMainWindow, Ui_fpTemp):
+  """ лицевая панель виртуального термометра  
+       vTemp  - экземпляр виртуального термометра, соответствующий данной панели 
+       basePS - (pointSize, height) базовая связка для масштабирования наименования физ-величины (llData)  """
+
+  def __init__(self, numDigits, vTemp):
+    """ numDigits - суммарное кол-во выводимых знаков результата (C учетом запятой) """
+    super(CfpTemp, self).__init__() 
+    self.setupUi(self)
+    self.vTemp = vTemp  
+
+    self.basePS = None
+    self.lcdTemp.setDigitCount(numDigits)
+
+  
+  def show(self, newsize = None):
+    """ newsize - экземпляр QSize для передачи новых размеров окна """
+    super().show()   # важно выполнить ПЕРЕД resize - иначе resize может не пройти
+    if newsize:  self.resize(newsize)
+
+
+  def closeEvent(self, event):
+    self.vTemp.SaveState()
+    event.accept() 
+
+
+  def resizeEvent(self, event):
+    rect = self.centralwidget.geometry()
+    font = self.llData.font()
+    fm = QtGui.QFontMetrics(font) 
+    textH = fm.boundingRect(self.llData.text()).height()
+
+    #print("layout.height = {} text.height = {} pointS = {}".format(rect.height(), textH, font.pointSize()))
+
+    if self.basePS:
+      # базовое значение уже зафиксировано - масштабируем 
+      delta = rect.height() - textH
+      if delta > 2 * self.basePS[1]:   deltaPS = 1
+      elif delta < 1.5 * self.basePS[1]: deltaPS = -1  
+      else:                              deltaPS = 0
+
+      if deltaPS:
+        font.setPointSize(font.pointSize() + deltaPS)
+        self.llData.setFont(font)               
+
+    else:    
+      # первая отрисовка лицевой панели - захватываем базовые размеры для последующего масштабирования
+      # TODO - проверить не повлияет ли стартовое восстановление прошлой геометрии окна
+      self.basePS = (font.pointSize(), rect.height() - textH)  
+
+    super().resizeEvent(event)
+
+
+#---
+class CIon(CVInstr):
+  """ виртуальный иономер """
+  #  measN - наименование измерительного канала напряжения, связанного с данным экземпляром иономера
+  #  measT - наименование измерительного канала температуры, связанного с данным экземпляром иономера
+  #  lastT - последнее значение температуры, полученное из измерительного канала
+  #  timeT - время измерения температуры
+  #  lastN - последнее значение напряжения,  полученное из измерительного канала
+  #  timeN - время измерения температуры
+  #  techT - температура, введенная вручную с лицевой панели
+  #  workT - температура, на основании которой был выполнен последний расчет pX (зависит от режима)
+  #  profD - словарь доступных профилей  (key - наименование; value - экземпляр CIProf) (при сохранение - словарь инициализационных контейнеров профилей)
+  #  actPr - активный профиль (экземпляр CIProf - по-сути указатель на value в profD)
+  #  actPrName - наименование активного профиля (сохраняется при выключении)  (по-сути key в profD)
+
+  #  внешние свойства:
+  #    fTempTech - True  - режим ручного ввода температуры (_fTempTech - private копия)
+  #                False - автоматическое сканирование измерителя температуры                  
+  #    fTempComp - True  - режим термокоррекции включен (_fTempComp - private копия)
+  #    fDlog     - True - технологическое логирование в консоль
+
+  def __init__(self, dcfg, dstate = {}, fTech = False):
+    super().__init__(dcfg, dstate, fTech)
+    # TODO обработку ошибок конфигурации
+    self.measN = self.dictCfg["каналН"]
+    self.measT = self.dictCfg["каналТ"]
+    self.dictCfg["meas"] = [self.measN, self.measT] # фактически вносится в vinstrD
+
+    self.widthD = 6
+    self.precD = 3
+    self.formS = "{:"+str(self.widthD)+"."+str(self.precD)+"f}" 
+    self._fTempTech = False
+    self._fTempComp = True 
+    self._fDlog = False
+    self.techT = 20
+    self.workT = 20
+
+    self.lastT = 20    # ВРЕМЕННО - TODO решить вопрос с запуском иономера при неисправном термометре
+    self.profD = {}
+    if 'profD' in self.dictState: 
+      # восстанавливаем словарь калибровочных профилей 
+      for cont in self.dictState['profD'].values():
+        prof = CIProf(cont) 
+        self.profD[prof.Name] = prof   
+    
+      name = safeDget(self.dictState, 'actPrName', '')
+      if name in self.profD:   self.actPrName = name 
+      else:  
+        # прошлого активного профиля нет в словаре профилей (TODO - логирование)     
+        self.actPrName = prof.Name  # ставим активным последний профиль из восстановленного словаря profD
+
+      self.actPr = self.profD[self.actPrName]    
+    else: 
+      # сохраненных калибровочных профилей нет - создаем один с параметрами по-умолчанию
+      self.actPr = CIProf()   
+      self.actPrName = self.actPr.Name
+      self.profD[self.actPrName] = self.actPr 
+
+    self.win = CfpIon(self)
+    
+    #--- синхронизация с лицевой панелью
+    # отображение профилей
+    self.SelectPr(self.actPrName, True)
+    # вызовы сеттеров для синхронизации состояния иономера и лицевой панели
+    self.fTempComp = self._fTempComp 
+    self.fTempTech = self._fTempTech  
+
+    self.LoadState()
+
+
+  def LoadState(self):
+    super().LoadState()
+
+
+  def SaveState(self):
+    # генерация словаря инициализационных контейнеров
+    td = {} 
+    for name, prof in self.profD.items():     
+      td[name] = prof.getICont()
+    self.dictState['profD'] = td
+    self.dictState['actPrName'] = self.actPrName
+    super().SaveState()
+
+
+  def NewData(self, ddata):
+    
+    if self.measT in ddata:
+      self.lastT = ddata[self.measT][1]
+      self.timeT = ddata[self.measT][2]   
+      fNewTemp = True
+    else:  
+      fNewTemp = False
+
+    if self.measN in ddata:
+      # расчет pX идет только при наличии данных от милливольтметра
+      self.CalcDpX(ddata[self.measN][1], self.lastT)
+
+    if fNewTemp:  self.DispTemp(self.lastT)
+
+  
+  def DispTemp(self, temp):
+    """ обновить значение температуры temp на лицевой панели """
+    if not self._fTempTech:  self.win.leTemp.setText("{:5.2f}".format(temp))
+
+
+  def CalcDpX(self, Um , Tm):
+    """ расчет pX в зависимости от режима и вывод на лицевую панель 
+        Um - актуальное напряжение [B] от измерителя - милливольтметра
+        Tm - актуальная температура [град Цельсия] от измерителя - термометра  """
+
+    if not self._fTempComp:  T = self.actPr.getTCb() # при отключенной термокоррекции расчет идет на температуре калибровки 
+    elif self._fTempTech:    T = self.techT  # расчет на основе температуры заданной вручную
+    else:                    T = Tm          # расчет на основе температуры от измерителя    
+
+    self.workT = T
+    pX = self.actPr.Calc(Um, T)
+    if self._fDlog:  print("E = {} \t T = {:5.2f} \t pX = {:6.3f}".format(Um, T, pX))
+    self.win.lcdMain.display(self.formS.format(pX))
+
+
+  @property
+  def fTempTech(self):
+    return self._fTempTech
+
+  @fTempTech.setter
+  def fTempTech(self, value):
+    self._fTempTech = value
+    if value:          
+      self.win.leTemp.setText("{:5.2f}".format(self.techT))
+    else:
+      self.win.leTemp.setText("{:5.2f}".format(self.lastT))
+
+    self.win.tbAutoT.setDown(not self._fTempTech)
+    self.win.leTemp.setReadOnly(not (self._fTempTech and self._fTempComp))   
+
+
+  @property
+  def fTempComp(self):
+    return self._fTempComp
+
+  @fTempComp.setter
+  def fTempComp(self, value):
+    self._fTempComp = value
+    if not value:
+      # при отключении термокоррекции все расчеты идут на температуре при которой была выполнена калибровка 
+      self.fTempTech = True  # принудительно останавливаем отображение измерителя температуры
+      self.win.tbAutoT.setEnabled(False) # с последующей блокировкой включения
+      self.win.leTemp.setText("{:5.2f}".format(self.actPr.getTCb())) 
+    else:
+      self.win.tbAutoT.setEnabled(True) 
+
+    self.win.tbTComp.setDown(self._fTempComp)
+    self.win.leTemp.setReadOnly(not (self._fTempTech and self._fTempComp)) 
+
+  @property
+  def fDlog(self):
+    return self._fDlog
+
+  @fDlog.setter
+  def fDlog(self, value):
+    self._fDlog = value
+
+
+  def SelectPr(self, name, fRefresh = False, fDelete = False):
+    """ переход на работу по профилю с наименованием name 
+         fRefresh - True - обновить содержимое выпадающего списка профилей на лицевой панели 
+         fDelete  - True - удалить текущий активный профиль после перехода на name """  # TODO 
+
+    print("name={} fRefresh={} fDelete={} Name={}".format(name, fRefresh, fDelete, self.actPr.Name))
+
+    old_name = self.actPr.Name
+    self.actPr = self.profD[name]
+    self.actPrName = name
+
+    print("old_name={} Name={}".format(old_name, self.actPr.Name)) 
+    if fDelete and (self.actPr.Name != old_name):  del self.profD[old_name]  
+    
+    if fRefresh:
+      self.win.fFreeze = True # блокируем обработку событий на время обновления списка
+      self.win.cbElec.clear() 
+      ind = 0  # хинт для связи экземпляра CIProf и строки выпадающего списка на лицевой панели
+      for key in sorted(self.profD):
+        self.win.cbElec.addItem(key)
+        self.profD[key].extdict['ind'] = ind
+        ind = ind + 1
+  
+    self.win.fFreeze = True
+    self.win.cbElec.setCurrentIndex(self.actPr.extdict['ind'])  # хинт - связка
+    self.win.fFreeze = False 
+
+#---
+class CfpIon(QtGui.QMainWindow, Ui_fpIon):
+  """ лицевая панель виртуального иономера """
+  #  winCI  - экземпляр CfmICalib - окно настройки иономера
+  #  vIon   - экземпляр виртуального иономера, соответствующий данной панели
+  #  fFreeze - True - отключить обработку событий выпадающего списка профилей
+
+  def __init__(self, vIon):
+    super().__init__() 
+    self.setupUi(self)
+    self.vIon = vIon
+    self.fFreeze = False
+    self.lcdMain.setDigitCount(self.vIon.widthD + 1)
+
+    self.winCI = CfmICalib()
+    
+    self.actConf.triggered.connect(self.on_muConf_toggle)
+    self.menubar.addAction(self.actConf)
+    if self.vIon.fTech:   
+      # виртуальный прибор запущен в технологическом режиме 
+      self.actTech = QtGui.QAction("Отладка", self) 
+      self.actTech.triggered.connect(self.on_muTech_toggle)  
+      self.menubar.addAction(self.actTech)
+
+    self.tbTComp.clicked.connect(self.on_TComp_toggle)
+    self.tbAutoT.clicked.connect(self.on_AutoT_toggle)
+    self.leTemp.editingFinished.connect(self.on_leTempFinish)
+    self.cbElec.currentIndexChanged.connect(self.on_cbElec_changed)
+
+
+  def show(self, newsize = None):
+    """ newsize - экземпляр QSize для передачи новых размеров окна """
+    super().show()   # важно выполнить ПЕРЕД resize - иначе resize может не пройти
+    if newsize:  self.resize(newsize)
+
+
+  def closeEvent(self, event):
+    self.vIon.SaveState()
+    event.accept() 
+
+
+  def on_muConf_toggle(self):
+    #self.winCI.show(self.vIon.profD, self.vIon.actPr, self.vIon)
+    smartShow(self.winCI, self.vIon.profD, self.vIon.actPr, self.vIon)
+
+
+  def on_muTech_toggle(self):
+    self.vIon.fDlog = not self.vIon.fDlog
+
+
+  def on_TComp_toggle(self):
+    self.vIon.fTempComp = not self.vIon.fTempComp
+
+
+  def on_AutoT_toggle(self): 
+    self.vIon.fTempTech = not self.vIon.fTempTech
+
+
+  def on_leTempFinish(self):
+    try:
+      self.vIon.techT = eval(self.leTemp.text(), {}, {})
+    except:
+      print(sys.exc_info())   # TODO логирование
+    self.leTemp.setText("{:5.2f}".format(self.vIon.techT))
+    self.leTemp.clearFocus()
+
+
+  def on_cbElec_changed(self, ind):
+    print("cbElec_changed [ind={}; fFreeze={}] !!!".format(ind, self.fFreeze))   
+
+    if not self.fFreeze:
+      self.fFreeze = True  # блокировка рекурентного вызова
+      self.vIon.SelectPr(self.cbElec.currentText())
+      self.fFreeze = False
+
+
+
+
+
+ 

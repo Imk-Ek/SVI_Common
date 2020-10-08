@@ -1,0 +1,1823 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>fmO_2Calib</class>
+ <widget class="QMainWindow" name="fmO_2Calib">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>399</width>
+    <height>617</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Градуировка</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tabSreda">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>401</width>
+      <height>571</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>IBeamCursor</cursorShape>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <widget class="QWidget" name="tabFist">
+     <attribute name="title">
+      <string>Основные зависимости</string>
+     </attribute>
+     <widget class="QLineEdit" name="leI_1">
+      <property name="geometry">
+       <rect>
+        <x>253</x>
+        <y>29</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_14">
+      <property name="geometry">
+       <rect>
+        <x>213</x>
+        <y>30</y>
+        <width>41</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>I&lt;sub&gt;1&lt;/sub&gt;=</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbElecAdd">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>340</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>+</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_15">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>30</y>
+        <width>31</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>[нА]</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbCalib">
+      <property name="geometry">
+       <rect>
+        <x>13</x>
+        <y>290</y>
+        <width>341</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Расчитать калибровочные коэффициенты</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leA_1">
+      <property name="geometry">
+       <rect>
+        <x>53</x>
+        <y>29</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbElec">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>340</y>
+        <width>311</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>13</x>
+        <y>30</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>A&lt;sub&gt;1&lt;/sub&gt;=</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leElec">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>340</y>
+        <width>311</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_16">
+      <property name="geometry">
+       <rect>
+        <x>216</x>
+        <y>120</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>P&lt;sub&gt;град&lt;/sub&gt;=</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leP_grad">
+      <property name="geometry">
+       <rect>
+        <x>256</x>
+        <y>119</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>343</x>
+        <y>120</y>
+        <width>31</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>[кПа]</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>13</x>
+        <y>120</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>Т&lt;sub&gt;град&lt;/sub&gt;=</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leT_grad">
+      <property name="geometry">
+       <rect>
+        <x>53</x>
+        <y>119</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_19">
+      <property name="geometry">
+       <rect>
+        <x>143</x>
+        <y>30</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>[мг/дм3]</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_20">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>70</y>
+        <width>31</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>[нА]</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_21">
+      <property name="geometry">
+       <rect>
+        <x>143</x>
+        <y>70</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>[мг/дм3]</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_22">
+      <property name="geometry">
+       <rect>
+        <x>213</x>
+        <y>70</y>
+        <width>41</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>I&lt;sub&gt;2&lt;/sub&gt;=</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leI_2">
+      <property name="geometry">
+       <rect>
+        <x>253</x>
+        <y>69</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_23">
+      <property name="geometry">
+       <rect>
+        <x>13</x>
+        <y>70</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>A&lt;sub&gt;2&lt;/sub&gt;=</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leA_2">
+      <property name="geometry">
+       <rect>
+        <x>53</x>
+        <y>69</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_24">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>250</y>
+        <width>31</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>[ ]</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leA_0">
+      <property name="geometry">
+       <rect>
+        <x>53</x>
+        <y>249</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_25">
+      <property name="geometry">
+       <rect>
+        <x>13</x>
+        <y>250</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>A&lt;sub&gt;0&lt;/sub&gt;=</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_26">
+      <property name="geometry">
+       <rect>
+        <x>143</x>
+        <y>250</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>[мг/дм3]</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leS">
+      <property name="geometry">
+       <rect>
+        <x>253</x>
+        <y>249</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_27">
+      <property name="geometry">
+       <rect>
+        <x>213</x>
+        <y>250</y>
+        <width>41</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>S&lt;sub&gt;&lt;/sub&gt;=</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_28">
+      <property name="geometry">
+       <rect>
+        <x>13</x>
+        <y>180</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>A=</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leA">
+      <property name="geometry">
+       <rect>
+        <x>53</x>
+        <y>180</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbEd">
+      <property name="geometry">
+       <rect>
+        <x>13</x>
+        <y>215</y>
+        <width>341</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Пересчитать в мг/дм3</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_29">
+      <property name="geometry">
+       <rect>
+        <x>343</x>
+        <y>181</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>[мг/дм3]</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leA_mgdm3">
+      <property name="geometry">
+       <rect>
+        <x>253</x>
+        <y>180</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbEd">
+      <property name="geometry">
+       <rect>
+        <x>143</x>
+        <y>180</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>мг/дм3</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="cbTypeMess">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>447</y>
+        <width>311</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>Кислородомер</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="cbSreda">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>397</y>
+        <width>311</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>Жидкость</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>422</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>Тип измерения</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_30">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>372</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>Среда измерения</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_31">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>320</y>
+        <width>121</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>Профиль измерения</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_32">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>475</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>Тип датчика</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbSensor">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>500</y>
+        <width>311</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>ACpO2-00</string>
+       </property>
+      </item>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Коэффициенты по параметрам</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>391</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Температура</string>
+      </property>
+      <widget class="QLineEdit" name="leT_2">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>59</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_33">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
+         <y>20</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>[мг/дм3]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_34">
+       <property name="geometry">
+        <rect>
+         <x>347</x>
+         <y>20</y>
+         <width>31</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>[нА]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_35">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>Т&lt;sub&gt;2&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_36">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>20</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>А&lt;sub&gt;1&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_37">
+       <property name="geometry">
+        <rect>
+         <x>347</x>
+         <y>60</y>
+         <width>31</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>[нА]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_38">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>60</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>А&lt;sub&gt;2&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leA_T_1">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>19</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leA_T_2">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>59</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leT_1">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>19</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_39">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>Т&lt;sub&gt;1&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_40">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
+         <y>60</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>[мг/дм3]</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leA_t_0">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>99</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_57">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>100</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>A&lt;sub&gt;0&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leS_t">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>99</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_58">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>100</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>S&lt;sub&gt;t&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chb_Applay_T">
+       <property name="geometry">
+        <rect>
+         <x>17</x>
+         <y>130</y>
+         <width>161</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Применить</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>180</y>
+        <width>391</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Содержание соли</string>
+      </property>
+      <widget class="QLineEdit" name="leSl_2">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>59</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_41">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
+         <y>20</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>[мг/дм3]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_42">
+       <property name="geometry">
+        <rect>
+         <x>347</x>
+         <y>20</y>
+         <width>31</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>[нА]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_43">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>Sl&lt;sub&gt;2&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_44">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>20</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>А&lt;sub&gt;1&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_45">
+       <property name="geometry">
+        <rect>
+         <x>347</x>
+         <y>60</y>
+         <width>31</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>[нА]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_46">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>60</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>А&lt;sub&gt;2&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leA_Sl_1">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>19</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leA_Sl_2">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>59</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leSl_1">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>19</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_47">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>Sl&lt;sub&gt;1&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_48">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
+         <y>60</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>[мг/дм3]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_59">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>101</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>A&lt;sub&gt;0&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leA_sl_0">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>100</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_60">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>101</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>S&lt;sub&gt;sl&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leS_sl">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>100</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chb_Applay_Salt">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>134</y>
+         <width>161</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Применить</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>350</y>
+        <width>391</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Жидкость/Газ</string>
+      </property>
+      <widget class="QLineEdit" name="leA_l_2">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>59</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_49">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
+         <y>20</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>[мг/дм3]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_50">
+       <property name="geometry">
+        <rect>
+         <x>347</x>
+         <y>20</y>
+         <width>31</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>[нА]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_51">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>Аж&lt;sub&gt;2&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_52">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>20</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>А&lt;sub&gt;1&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_53">
+       <property name="geometry">
+        <rect>
+         <x>347</x>
+         <y>60</y>
+         <width>31</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>[нА]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_54">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>60</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>А&lt;sub&gt;2&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leA_g_1">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>19</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leA_g_2">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>59</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leA_l_1">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>19</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_55">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>Aж&lt;sub&gt;1&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_56">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
+         <y>60</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>[мг/дм3]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_61">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>101</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>A&lt;sub&gt;0&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leA_l_0">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>100</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_62">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>101</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="lineWidth">
+        <number>-5</number>
+       </property>
+       <property name="text">
+        <string>S&lt;sub&gt;g&lt;/sub&gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leS_l">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>100</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chb_Applay_Salt_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>131</y>
+         <width>161</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Применить</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QToolButton" name="tbCalc_coeff_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>520</y>
+        <width>341</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Расчитать  коэффициенты</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>399</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="muProf">
+    <property name="title">
+     <string>Профиль</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="muTabl">
+    <property name="title">
+     <string>Таблица</string>
+    </property>
+   </widget>
+   <addaction name="muProf"/>
+   <addaction name="muTabl"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actTIns">
+   <property name="text">
+    <string>Вставить строку</string>
+   </property>
+  </action>
+  <action name="actTDel">
+   <property name="text">
+    <string>Удалить строку</string>
+   </property>
+  </action>
+  <action name="actPrIns">
+   <property name="text">
+    <string>Новый профиль</string>
+   </property>
+  </action>
+  <action name="actPrDel">
+   <property name="text">
+    <string>Удалить профиль</string>
+   </property>
+  </action>
+  <action name="actPrRen">
+   <property name="text">
+    <string>Переименовать профиль</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

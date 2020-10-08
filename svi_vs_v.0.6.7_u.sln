@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{839A79F4-7824-4069-A00D-76B9B1A5773C}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "svi_vs", "svi_vs.pyproj", "{D75005D7-C19B-4CD0-AF01-94EF363EA4B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D75005D7-C19B-4CD0-AF01-94EF363EA4B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D75005D7-C19B-4CD0-AF01-94EF363EA4B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D75005D7-C19B-4CD0-AF01-94EF363EA4B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D75005D7-C19B-4CD0-AF01-94EF363EA4B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

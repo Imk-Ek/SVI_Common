@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>fmAmperConf</class>
+ <widget class="QMainWindow" name="fmAmperConf">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>783</width>
+    <height>449</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Настройки микроамперметра </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLineEdit" name="leAddrMB">
+    <property name="geometry">
+     <rect>
+      <x>192</x>
+      <y>18</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_16">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Адрес MODBUS:</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbAddrMBWr">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>17</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Wr</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbAddrMBRd">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>17</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Rd</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbthrATRd">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>47</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Rd</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbthrATWr">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>47</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Wr</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lethrAT">
+    <property name="geometry">
+     <rect>
+      <x>192</x>
+      <y>48</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_17">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>131</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Пауза во фрейме:</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbConfRd">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>240</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Rd</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbConfWr">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>240</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Wr</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leConf">
+    <property name="geometry">
+     <rect>
+      <x>192</x>
+      <y>241</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_18">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>244</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>ADC conf &lt;b&gt;(hex)&lt;/b&gt;:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_19">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>324</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Серийный номер:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leSerNum">
+    <property name="geometry">
+     <rect>
+      <x>192</x>
+      <y>322</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbSerNumWr">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>321</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Wr</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbSerNumRd">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>321</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Rd</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leZeroA">
+    <property name="geometry">
+     <rect>
+      <x>191</x>
+      <y>97</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>100</y>
+      <width>151</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Смещение нуля(32р):</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lemK">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>129</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>130</y>
+      <width>141</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="lineWidth">
+     <number>-5</number>
+    </property>
+    <property name="text">
+     <string>Коэффициент(32р):</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbZeroARd">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>96</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Rd</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbZeroAWr">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>96</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Wr</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbZeroARdVar">
+    <property name="geometry">
+     <rect>
+      <x>282</x>
+      <y>96</y>
+      <width>51</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RdVar</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbmKRdVar">
+    <property name="geometry">
+     <rect>
+      <x>282</x>
+      <y>128</y>
+      <width>51</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RdVar</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbmKRd">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>128</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Rd</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbmKWr">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>128</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Wr</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbModeRd">
+    <property name="geometry">
+     <rect>
+      <x>279</x>
+      <y>208</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Rd</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbModeWr">
+    <property name="geometry">
+     <rect>
+      <x>309</x>
+      <y>208</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Wr</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leMode">
+    <property name="geometry">
+     <rect>
+      <x>191</x>
+      <y>209</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_20">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>212</y>
+      <width>131</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>ADC mode &lt;b&gt;(hex)&lt;/b&gt;:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_21">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>276</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>ADC IO &lt;b&gt;(hex)&lt;/b&gt;:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leIO">
+    <property name="geometry">
+     <rect>
+      <x>191</x>
+      <y>274</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbIOWr">
+    <property name="geometry">
+     <rect>
+      <x>309</x>
+      <y>273</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Wr</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbIORd">
+    <property name="geometry">
+     <rect>
+      <x>279</x>
+      <y>273</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Rd</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbSave">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>367</y>
+      <width>361</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Сохранить в энергонезависимой памяти</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line_3">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>346</y>
+      <width>381</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_22">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>160</y>
+      <width>171</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Кол-во отсчетов для усред.</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leCount_Amper">
+    <property name="geometry">
+     <rect>
+      <x>192</x>
+      <y>158</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbCount_AmperWr">
+    <property name="geometry">
+     <rect>
+      <x>369</x>
+      <y>157</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Wr</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbCount_AmperRd">
+    <property name="geometry">
+     <rect>
+      <x>339</x>
+      <y>157</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Rd</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbCount_AmpeRdVar">
+    <property name="geometry">
+     <rect>
+      <x>282</x>
+      <y>157</y>
+      <width>51</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RdVar</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbDescribeWr">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>77</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Wr</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_34">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>107</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Тип модуля</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbTypeIDRd">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>104</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Rd</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leTypeID">
+    <property name="geometry">
+     <rect>
+      <x>602</x>
+      <y>105</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_33">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>10</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Описание</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbTypeIDWr">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>104</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Wr</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="teDescribe">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>40</y>
+      <width>311</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbDescribeRd">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>77</y>
+      <width>27</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Rd</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>783</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>?</string>
+    </property>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

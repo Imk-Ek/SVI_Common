@@ -1,0 +1,1414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>fmAD779x</class>
+ <widget class="QMainWindow" name="fmAD779x">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>573</width>
+    <height>415</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Прямой доступ к AD779x</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="twRegs">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>551</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <property name="elideMode">
+     <enum>Qt::ElideNone</enum>
+    </property>
+    <widget class="QWidget" name="wtData">
+     <attribute name="title">
+      <string>Данные</string>
+     </attribute>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>15</x>
+        <y>30</y>
+        <width>111</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Данные АЦП:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="llData">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>28</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Panel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbDataRd">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>27</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Rd</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>314</x>
+        <y>30</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Статус АЦП:</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbStatusRd">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>27</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Rd</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="llStatus">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>28</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Panel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leOffset">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>63</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbOffsetRd">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>62</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Rd</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbOffsetWr">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>62</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wr</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>15</x>
+        <y>65</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>Смещение нуля:</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbScaleWr">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>99</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wr</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leScale">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>100</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbScaleRd">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>99</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Rd</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>15</x>
+        <y>102</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>-5</number>
+      </property>
+      <property name="text">
+       <string>Коэффициент:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="llID">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>62</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Panel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbIDRd">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>61</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Rd</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>64</y>
+        <width>21</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>ID:</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbDataA">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>27</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </widget>
+     <widget class="QLCDNumber" name="lcdDataConv">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>140</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbConv">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>160</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>M</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="wtMode">
+     <attribute name="title">
+      <string>Режим</string>
+     </attribute>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>34</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>ADC mode &lt;b&gt;(hex)&lt;/b&gt;:</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbModeRd">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>31</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Rd</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbModeWr">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>31</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wr</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leMode">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>32</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbMode">
+      <property name="geometry">
+       <rect>
+        <x>165</x>
+        <y>71</y>
+        <width>231</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>5</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>Continuos Conversion</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Single Conversion</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Idle Mode</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Power Down</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Internal Zero Calibration</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Internal Full-Scale Calibration</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>System Zero Calibration</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>System Full-Scale Calibration</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="cbFadc">
+      <property name="geometry">
+       <rect>
+        <x>165</x>
+        <y>150</y>
+        <width>231</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>10</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>недопустимое значение</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>470 Гц</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>242 Гц</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>123 Гц</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>62 Гц</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>50 Гц</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>39 Гц</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>33,2  Гц</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>19,6 Гц</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>16,7 Гц (80 dB @ 50 Гц)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>16,7 Гц (65 dB @ 50 Гц и 60 Гц)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>12,5 Гц (66 dB @ 50 Гц и 60 Гц)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>10 Гц    (69 dB @ 50 Гц и 60 Гц)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>8,33 Гц (70 dB @ 50 Гц и 60 Гц)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>6,25 Гц (72 dB @ 50 Гц и 60 Гц)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>4,17 Гц (74 dB @ 50 Гц и 60 Гц)</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>153</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string> Выходная частота:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_14">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>113</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string> Опорная частота:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbClock">
+      <property name="geometry">
+       <rect>
+        <x>165</x>
+        <y>110</y>
+        <width>231</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>Internal 64 kHz (CLK disconnected)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Internal 64 kHz (CLK out)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>External 64 kHz </string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>External clock divided by 2</string>
+       </property>
+      </item>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="wtConf">
+     <attribute name="title">
+      <string>Конфигурация</string>
+     </attribute>
+     <widget class="QLineEdit" name="leConf">
+      <property name="geometry">
+       <rect>
+        <x>225</x>
+        <y>18</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbConfRd">
+      <property name="geometry">
+       <rect>
+        <x>315</x>
+        <y>17</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Rd</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbConfWr">
+      <property name="geometry">
+       <rect>
+        <x>345</x>
+        <y>17</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wr</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>20</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>ADC conf &lt;b&gt;(hex)&lt;/b&gt;:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbBias">
+      <property name="geometry">
+       <rect>
+        <x>178</x>
+        <y>118</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>отключен</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>к AIN1(-)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>к AIN2(-)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>зарезервировано</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QCheckBox" name="chBurnT">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>150</y>
+        <width>151</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Тестовый ист. тока</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbCode">
+      <property name="geometry">
+       <rect>
+        <x>378</x>
+        <y>87</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>Двухполярный</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Однополярный</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>297</x>
+        <y>58</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Усиление:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbAmp">
+      <property name="geometry">
+       <rect>
+        <x>377</x>
+        <y>55</y>
+        <width>51</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>7</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>x1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>x2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>x4</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>x8</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>x16</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>x32</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>x64</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>x128</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="cbRef">
+      <property name="geometry">
+       <rect>
+        <x>178</x>
+        <y>88</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>Внешний</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Внутренний</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>32</x>
+        <y>90</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Опорный источник:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbChan">
+      <property name="geometry">
+       <rect>
+        <x>137</x>
+        <y>55</y>
+        <width>131</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>AIN1(+) - AIN1(-)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>AIN2(+) - AIN2(-)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>AIN3(+) - AIN3(-)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>AIN1(-) - AIN1(-)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>зарезервировано</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>зарезервировано</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>термодатчик</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>AVdd</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>58</y>
+        <width>51</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Канал:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>120</y>
+        <width>145</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Источник смещения:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>90</y>
+        <width>31</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Код:</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chABias">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>180</y>
+        <width>181</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Усиленный  ист. смещения</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chAmp">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>363</x>
+        <y>150</y>
+        <width>151</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Усиленный вход</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="wtJ">
+     <attribute name="title">
+      <string>Источники тока</string>
+     </attribute>
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>23</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>ADC IO &lt;b&gt;(hex)&lt;/b&gt;:</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbIOWr">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>20</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wr</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="leIO">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>21</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tbIORd">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>20</y>
+        <width>27</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Rd</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbJDir">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>100</y>
+        <width>241</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>(IEXC1 -&gt; IOUT1)  (IEXC2 -&gt; IOUT2)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>(IEXC1 -&gt; IOUT2)  (IEXC2 -&gt; IOUT1)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Оба источника на IOUT1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Оба источника на IOUT2</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>103</y>
+        <width>181</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Коммутация источников:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_19">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>66</y>
+        <width>111</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Величина тока:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbJVal">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>63</y>
+        <width>71</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>откл.</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>10 uA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>210 uA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>1 mA</string>
+       </property>
+      </item>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QComboBox" name="cbADC">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>20</y>
+      <width>121</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <item>
+     <property name="text">
+      <string>AD7792 (16 бит)</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD7793 (24  бит)</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label_15">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>22</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Адрес MODBUS:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leAddrMB">
+    <property name="geometry">
+     <rect>
+      <x>155</x>
+      <y>20</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_16">
+    <property name="geometry">
+     <rect>
+      <x>339</x>
+      <y>23</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Тип АЦП:</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cbPE2">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>60</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>PE2 = 1</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cbPE6">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>85</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>PE6 = 1</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tbSwitch">
+    <property name="geometry">
+     <rect>
+      <x>298</x>
+      <y>84</y>
+      <width>164</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Установить</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="llData_2">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>60</y>
+      <width>161</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="text">
+     <string>Входной коммутатор</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cbPD5">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>85</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>PD5 = 1</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cbPF1">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>60</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>PF1 = 1</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>573</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>?</string>
+    </property>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
