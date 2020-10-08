@@ -2,9 +2,13 @@
 
 import logging
 from PyQt4 import QtCore, QtGui 
-#from fpVolt import Ui_fpVolt
-from fpVATP import Ui_fpVATP
-from fmOtherSettingV import Ui_fmOtherSettingV
+from common import PCFlag
+if PCFlag==1:
+    from fpVATP import Ui_fpVATP
+    from fmOtherSettingV import Ui_fmOtherSettingV
+if PCFlag==2:
+    from fpVATP_t import Ui_fpVATP
+    from fmOtherSettingV_t import Ui_fmOtherSettingV
 from vinstr import *
 from vp_classes import *
 #LL = logging.getLogger('SVI')

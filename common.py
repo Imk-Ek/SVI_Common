@@ -40,3 +40,5 @@ def  smartShow(win, *args, **kw):
   win.show(*args, **kw)  # передача параметров в перегруженный метод
   #win.show()
 
+# Флаг версии для ПК
+PCFlag=2

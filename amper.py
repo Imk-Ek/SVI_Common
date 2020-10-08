@@ -1,9 +1,9 @@
 ﻿
 import logging
 from PyQt4 import QtCore, QtGui 
-
-#from fpAmper import Ui_fpAmper
-from fpVATP import Ui_fpVATP
+from common import PCFlag
+if PCFlag==1:from fpVATP import Ui_fpVATP
+if PCFlag==2:from fpVATP_t import Ui_fpVATP
 from vinstr import *
 from vp_classes import *
 #LL = logging.getLogger('SVI')
@@ -42,7 +42,7 @@ class CAmper(CVInstr):
     if(self.ParamMess=='1'):
       self.timer = QtCore.QTimer()
       self.timer.timeout.connect(self.NewDataTimer)
-      self.timer.start(1000)
+      self.timer.start(500)
 
     self.widthD = 6 # 4
     self.precD = 2  # 3
@@ -70,6 +70,7 @@ class CAmper(CVInstr):
     if (self.vCE.Close_Config_Flag==1)and(self.closeFlag==0): 
           self.closeFlag=1      
           self.win.close()
+          self.win.close()				  
     if self.measI in ddata:
       self.tmpVal=ddata[self.measI][1]
       if(self.tmpVal<0): self.tmpVal=self.tmpVal*(-1)
@@ -96,6 +97,7 @@ class CAmper(CVInstr):
    if (self.vCE.Close_Config_Flag==1)and(self.closeFlag==0): 
           self.closeFlag=1      
           self.win.close() 
+          self.win.close()			  
    if(self.ParamMess=='1'): 
     
       self.lastI =8

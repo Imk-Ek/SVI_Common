@@ -1,5 +1,4 @@
 ﻿
-
 #import sys, traceback
 import logging
 from PyQt4 import QtCore, QtGui 
@@ -8,14 +7,13 @@ from datetime import datetime
 from common import *
 from vp_classes import *
 import Results
-from fpO_2_2 import Ui_fpO_2
+if PCFlag==1:from fpO_2_2 import Ui_fpO_2
+if PCFlag==2:from fpO_2_2_t import Ui_fpO_2
 from fmO_2Calib import Ui_fmO_2Calib
 from fmSelectProfil_O2 import Ui_fmSelectProfil_O2
 from vinstr import CVInstr
 LL = logging.getLogger('SVI')
 from PyQt4.QtCore import SIGNAL
-
-
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -663,23 +661,25 @@ class CfpO_2(QtGui.QMainWindow, Ui_fpO_2):
   def __init__(self, vO_2):
     super().__init__() 
     self.setupUi(self)
-    ####################################
-    #self.leSalt = QtGui.QLineEdit(self.centralwidget)
-    self.leSalt = QLineEdit_1(self.centralwidget)
-    self.leSalt.setGeometry(QtCore.QRect(140, 390, 84, 31))
-    sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Preferred)
-    sizePolicy.setHorizontalStretch(0)
-    sizePolicy.setVerticalStretch(0)
-    sizePolicy.setHeightForWidth(self.leSalt.sizePolicy().hasHeightForWidth())
-    self.leSalt.setSizePolicy(sizePolicy)
-    self.leSalt.setMinimumSize(QtCore.QSize(81, 31))
-    font = QtGui.QFont()
-    font.setFamily(_fromUtf8("Verdana"))
-    font.setPointSize(12)
-    self.leSalt.setFont(font)
-    self.leSalt.setFrame(True)
-    self.leSalt.setReadOnly(True)
-    self.leSalt.setObjectName(_fromUtf8("leSalt"))
+    #################################### 
+    # Если версия для ПК
+    if PCFlag==1:
+      #self.leSalt = QtGui.QLineEdit(self.centralwidget)
+      self.leSalt = QLineEdit_1(self.centralwidget)
+      self.leSalt.setGeometry(QtCore.QRect(140, 390, 84, 31))
+      sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Preferred)
+      sizePolicy.setHorizontalStretch(0)
+      sizePolicy.setVerticalStretch(0)
+      sizePolicy.setHeightForWidth(self.leSalt.sizePolicy().hasHeightForWidth())
+      self.leSalt.setSizePolicy(sizePolicy)
+      self.leSalt.setMinimumSize(QtCore.QSize(81, 31))
+      font = QtGui.QFont()
+      font.setFamily(_fromUtf8("Verdana"))
+      font.setPointSize(12)
+      self.leSalt.setFont(font)
+      self.leSalt.setFrame(True)
+      self.leSalt.setReadOnly(True)
+      self.leSalt.setObjectName(_fromUtf8("leSalt"))
     #####################################
     self.setStyleSheet("QMainWindow {background: '#A4EBFD';}")
     self.leSalt.setReadOnly(0)

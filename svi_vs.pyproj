@@ -33,12 +33,15 @@
     <Compile Include="fmDigitalKeyboard.py" />
     <Compile Include="fmKeyboard.py" />
     <Compile Include="fmMessage.py" />
+    <Compile Include="fmOtherSettingV_t.py" />
     <Compile Include="fmSelectV.py" />
     <Compile Include="fmTKR.py" />
     <Compile Include="fpCond_3.py" />
     <Compile Include="fpIon_2.py" />
     <Compile Include="fpO_2_2.py" />
+    <Compile Include="fpO_2_2_t.py" />
     <Compile Include="fpVATP.py" />
+    <Compile Include="fpVATP_t.py" />
     <Compile Include="vp_classes.py" />
     <Compile Include="config_edit.py" />
     <Compile Include="diagramscene.pyw" />
@@ -97,6 +100,7 @@
     <Content Include="forms\fmLiteNotepad.ui" />
     <Content Include="forms\fmMessage.ui" />
     <Content Include="forms\fmOtherSettingV.ui" />
+    <Content Include="forms\fmOtherSettingV_t.ui" />
     <Content Include="forms\fmProbaID.ui" />
     <Content Include="forms\fmProgramming_1_0.ui" />
     <Content Include="forms\fmProgramming_1_1.ui" />
@@ -152,11 +156,13 @@
     <Content Include="forms\fpIon.ui" />
     <Content Include="forms\fpIon.ui.rez" />
     <Content Include="forms\fpO_2.ui" />
+    <Content Include="forms\fpO_2_2_t.ui" />
     <Content Include="forms\fpPressure.ui" />
     <Content Include="forms\fpR_Band.ui" />
     <Content Include="forms\fpTemp.ui" />
     <Content Include="forms\fpUnit.ui" />
     <Content Include="forms\fpVATP.ui" />
+    <Content Include="forms\fpVATP_t.ui" />
     <Content Include="forms\fpVolt.ui" />
     <Content Include="forms\fpVolt.ui.rez2" />
     <Content Include="History.txt" />

@@ -2,9 +2,11 @@
 
 import logging
 from PyQt4 import QtCore, QtGui 
-
+from common import PCFlag
 #from fpTemp import Ui_fpTemp
-from fpVATP import Ui_fpVATP
+# Флаг версии для ПК
+if PCFlag==1:from fpVATP import Ui_fpVATP
+if PCFlag==2:from fpVATP_t import Ui_fpVATP
 from vinstr import *
 from vp_classes import *
 #LL = logging.getLogger('SVI')
@@ -20,6 +22,7 @@ class CTemp(CVInstr):
     super().__init__(dcfg, dstate, fTech)
     self.vCE=vCE
     self.closeFlag=0 
+    self.tmpVal=0			 
     self.Name=dcfg['наименование']
     self.ParamMess=dSize['VPParam']
     self.InputUnit=[0,0,0]
@@ -34,11 +37,15 @@ class CTemp(CVInstr):
     self.InLight_Notepad=0
     self.ID_VP='0'
     self.LastProfil=''
+    self.UpdateFlag=0				 
     Results.Result_Dict[self.Name][self.OutputVal[0]]=0
     # TODO обработку ошибок конфигурации
     if(self.ParamMess=='0'):
       self.measT = self.dictCfg["каналТемпература"]
       self.dictCfg["meas"] = [self.measT] # фактически вносится в vinstrD
+      self.timer = QtCore.QTimer()
+      self.timer.timeout.connect(self.NewDataTimer)
+      self.timer.start(1000)				
 
     if(self.ParamMess=='1'):
       self.timer = QtCore.QTimer()
@@ -62,6 +69,7 @@ class CTemp(CVInstr):
     self.winMessage =CfmMessage(self)
     self.win = CfpTemp(self.widthD + 1, self)
     self.win.lcdMain.display('888')
+    self.tt=0		 
     self.LoadState()
     
 
@@ -72,11 +80,23 @@ class CTemp(CVInstr):
     super().SaveState()
 
   def NewData(self, ddata):
-    self.win.lcdMain.display('999')
+    a=0
+    #self.win.lcdMain.display('999')
     if self.measT in ddata:
+      self.tt=ddata[self.measT][1]
+    if a==1:#self.measT in ddata:						 
       self.win.lcdMain.display(self.formS.format(ddata[self.measT][1]))
       self.win.lblEd.setText(self.Temp_ed)
       self.tmpVal=ddata[self.measT][1]
+      self.win.setUpdatesEnabled(true);
+      self.win.resize(); 
+      #self.win.repaint(); 
+      #self.win.update()
+      self.win.setUpdatesEnabled(false);
+      self.UpdateFlag=1
+      #self.win.on_tbSaveToNotepad_clicked()
+      self.win.tbSaveToNotepad_.click()
+      self.UpdateFlag=0				   
 
     Results.Result_Dict[self.Name][self.OutputVal[0]]=self.tmpVal
     Results.Result_Dict[self.Name]['Параметр '+self.OutputVal[0]]='Температура'
@@ -95,6 +115,10 @@ class CTemp(CVInstr):
    if (self.vCE.Close_Config_Flag==1)and(self.closeFlag==0): 
           self.closeFlag=1      
           self.win.close() 
+   if(self.ParamMess=='0'): 
+     #if self.measT in ddata:
+         self.win.lcdMain.display(self.formS.format(self.tt))
+         self.win.lblEd.setText(self.Temp_ed)
    if(self.ParamMess=='1'): 
     
       self.lastT =8
@@ -160,6 +184,7 @@ class CfpTemp(QtGui.QMainWindow, Ui_fpVATP):
 
     
   def on_tbSaveToNotepad_clicked(self):
+    if(self.vTemp.UpdateFlag==0):								  
      if(Results.Result_Dict[self.vTemp.Name]['В блокнот']==0):
         self.vTemp.ID_VP=self.lblID.text()
         self.vTemp.dSize['ID_VP']=self.vTemp.ID_VP
@@ -173,6 +198,9 @@ class CfpTemp(QtGui.QMainWindow, Ui_fpVATP):
 
   def timerEvent(self, e):
   #Отображение даты по таймеру
+        #self.setUpdatesEnabled(true);
+        #self.repaint(); 
+        #self.setUpdatesEnabled(false);						   
         if (self.vTemp.vCE.Close_Config_Flag==1)and(self.vTemp.closeFlag==0): 
           self.vTemp.closeFlag=1      
           self.close()

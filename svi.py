@@ -5,6 +5,7 @@ __status__  = "development"
 __version__ = "0.5i"
 __date__    = "19 Сентября 2013"
 #---
+from common import *
 import os, sys
 import atexit
 import pickle
@@ -53,7 +54,6 @@ from fmAmperConf import Ui_fmAmperConf
 from fmMain import Ui_fmMain
 from fmChangeVPribors import Ui_fmChangeVPribors
 from fmSelectProfil import Ui_fmSelectProfil
-from common import *
 from vinstr import *
 from filtr import filtrP
 import Results
