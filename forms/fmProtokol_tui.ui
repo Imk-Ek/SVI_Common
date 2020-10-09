@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>fmProtokol</class>
+ <widget class="QMainWindow" name="fmProtokol">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>283</width>
+    <height>270</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>СВП Ормет - режим наладки</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0" colspan="5">
+     <widget class="QColumnView" name="columnView"/>
+    </item>
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>27</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="btnSave">
+      <property name="text">
+       <string>Сохранить</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <spacer name="horizontalSpacer_6">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>28</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="3">
+     <widget class="QPushButton" name="btnPrint">
+      <property name="text">
+       <string>Печать</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="4">
+     <spacer name="horizontalSpacer_7">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>27</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>283</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="muDebug">
+    <property name="title">
+     <string>Отладка</string>
+    </property>
+    <addaction name="actPortCons"/>
+    <addaction name="actMBCons"/>
+    <addaction name="actAD779x"/>
+   </widget>
+   <widget class="QMenu" name="muSetting">
+    <property name="title">
+     <string>Настройка</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="muVInstr">
+    <property name="title">
+     <string>Виртуальные приборы</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="muPar">
+    <property name="title">
+     <string>Параметризация</string>
+    </property>
+    <addaction name="actParV"/>
+    <addaction name="actParT"/>
+    <addaction name="actParCond"/>
+    <addaction name="actParTP"/>
+    <addaction name="actParAmper"/>
+   </widget>
+   <widget class="QMenu" name="muAbout">
+    <property name="title">
+     <string>?</string>
+    </property>
+   </widget>
+   <addaction name="muDebug"/>
+   <addaction name="muPar"/>
+   <addaction name="muVInstr"/>
+   <addaction name="muSetting"/>
+   <addaction name="muAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actPortCons">
+   <property name="text">
+    <string>Консоль порта...</string>
+   </property>
+  </action>
+  <action name="actMBCons">
+   <property name="text">
+    <string>Консоль драйвера ...</string>
+   </property>
+  </action>
+  <action name="actAD779x">
+   <property name="text">
+    <string>AD779x...</string>
+   </property>
+  </action>
+  <action name="actParV">
+   <property name="text">
+    <string>Милливольтметр</string>
+   </property>
+  </action>
+  <action name="actParT">
+   <property name="text">
+    <string>Термометр</string>
+   </property>
+  </action>
+  <action name="actParCond">
+   <property name="text">
+    <string>Кондуктометр</string>
+   </property>
+  </action>
+  <action name="actParTP">
+   <property name="text">
+    <string>Измеритель давления</string>
+   </property>
+  </action>
+  <action name="actParAmper">
+   <property name="text">
+    <string>Микроамперметр</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

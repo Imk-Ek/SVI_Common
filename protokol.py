@@ -5,9 +5,10 @@ import logging
 from PyQt4 import QtCore, QtGui 
 #import sstate
 
-#from common import *
+from common import PCFlag
 #import Results
-from fmProtokol import Ui_fmProtokol
+if PCFlag==1: from fmProtokol import Ui_fmProtokol
+if PCFlag==2: from fmProtokol_t import Ui_fmProtokol
 from vinstr import CVInstr
 
 #LL = logging.getLogger('SVI')

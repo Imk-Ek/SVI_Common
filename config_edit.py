@@ -32,6 +32,7 @@ from temperature import*
 from notepad import*
 from Lite_notepad import*
 from protokol import*
+from Arrow_Pr import*					 
 import Results
 #from svi import*
 import svi
@@ -39,21 +40,31 @@ from vinstr import*
 
 #from diagramscene import*
 
-
-import AllResults
-from fmChangeVirtPriborsParam import Ui_fmChangeVirtPriborsParam
-from fmChangeVirtPribors import Ui_fmChangeVirtPribors
-from fmCreateConfig import Ui_fmCreateConfig
-from fmSelectConfig import Ui_fmSelectConfig
-from fmVPPassword import Ui_fmVPPassword
-from fmWelcome import Ui_fmWelcome
-from fmProgramming_1_1 import Ui_fmProgramming_1_1
-from fmAllSearch_1_0 import Ui_fmAllSearch_1_0
-from fmDigitalKeyboard import Ui_fmDigitalKeyboard
-from fmKeyboard import Ui_fmKeyboard
-
-
 from common import *
+import AllResults
+if PCFlag==1:
+  from fmChangeVirtPriborsParam import Ui_fmChangeVirtPriborsParam
+  from fmChangeVirtPribors import Ui_fmChangeVirtPribors
+  from fmCreateConfig import Ui_fmCreateConfig
+  from fmSelectConfig import Ui_fmSelectConfig
+  from fmVPPassword import Ui_fmVPPassword
+  from fmWelcome import Ui_fmWelcome
+  from fmProgramming_1_1 import Ui_fmProgramming_1_1
+  from fmAllSearch_1_0 import Ui_fmAllSearch_1_0
+  from fmDigitalKeyboard import Ui_fmDigitalKeyboard
+  from fmKeyboard import Ui_fmKeyboard
+if PCFlag==2:
+  from fmChangeVirtPriborsParam_t import Ui_fmChangeVirtPriborsParam
+  from fmChangeVirtPribors_t import Ui_fmChangeVirtPribors
+  from fmCreateConfig_t import Ui_fmCreateConfig
+  from fmSelectConfig_t import Ui_fmSelectConfig
+  from fmVPPassword_t import Ui_fmVPPassword
+  from fmWelcome_t import Ui_fmWelcome
+  from fmProgramming_1_1_t import Ui_fmProgramming_1_1
+  from fmAllSearch_1_0_t import Ui_fmAllSearch_1_0
+  from fmDigitalKeyboard_t import Ui_fmDigitalKeyboard
+  from fmKeyboard_t import Ui_fmKeyboard
+
 import vinstr
 from filtr import filtrP
 import Results
@@ -457,6 +468,7 @@ class CfmWelcome(QtGui.QMainWindow, Ui_fmWelcome):
   def on_tbSetting_toggle(self):
      """ Кнопка технологическрго режима """
      try:
+        self.ModeFlag= self.Cfg1["Калибровка мВ"]["ZeroA32"]																
         self.vCE.TechStart1(self.vCE.Cfg1)
      except:
       print(sys.exc_info())   # TODO логирование   DeleteConfig
@@ -528,6 +540,17 @@ class CfmSelectConfig(QtGui.QMainWindow, Ui_fmSelectConfig):
       if (y > dh):  y = dh - rect.height()
       self.vCE.InitConfigList()
       a=0
+      self.vCE.ModeFlag= self.vCE.Cfg1["Params"]["First"] 
+      if(self.vCE.ModeFlag!='1917'):
+        self.tbSetting.setVisible(False)
+        self.tbSettings.setVisible(False)
+        self.tbSetting.setEnabled(False)
+        self.tbSettings.setEnabled(False)
+      if(self.vCE.ModeFlag=='1917'):
+        self.tbSetting.setVisible(True)
+        self.tbSettings.setVisible(True)
+        self.tbSetting.setEnabled(True)
+        self.tbSettings.setEnabled(True)
       
 
   def on_tbSelectConf_toggle(self):
@@ -3979,6 +4002,8 @@ class CConfigEditor:
         a=False  
         self.vi["obj"] = CInputUnit_(self,self.vi, vstateD[vikey], cfg2['CurrCFG'][vikey], fTech = fTech1)
 
+      if vtype == "Стрелочный прибор":
+        self.vi["obj"] = CArrow_Pr(self,self.vi, vstateD[vikey], cfg2['CurrCFG'][vikey], fTech = fTech1)												  
     #--- связка каналов с виртуальными приборами TODO - обработка ошибок 
     for vikey, self.vi in self.vinstrD1.items():
       if ("obj" in self.vi) and ("meas" in self.vi):

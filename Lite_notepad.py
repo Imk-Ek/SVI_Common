@@ -4,7 +4,9 @@ import os
 import subprocess
 from PyQt4 import QtCore, QtGui 
 from datetime import datetime
-from fmLiteNotepad import Ui_fmLiteNotepad
+from common import PCFlag
+if PCFlag==1: from fmLiteNotepad import Ui_fmLiteNotepad
+if PCFlag==2: from fmLiteNotepad_t import Ui_fmLiteNotepad
 from vinstr import CVInstr
 import Results
 #LL = logging.getLogger('SVI')
@@ -207,18 +209,40 @@ class CfmLiteNotepad(QtGui.QMainWindow, Ui_fmLiteNotepad):
       """ Иницализация таблицы на форме ВП """
       tmpi=0
       self.tableW.setColumnCount(6)
-      hName='Идентификатор'
-      self.tableW.setHorizontalHeaderItem(0,QtGui.QTableWidgetItem(hName))
-      hName='Дата и время'
-      self.tableW.setHorizontalHeaderItem(1,QtGui.QTableWidgetItem(hName))
-      hName='Вирт. прибор'
-      self.tableW.setHorizontalHeaderItem(2,QtGui.QTableWidgetItem(hName))
-      hName='Профиль'
-      self.tableW.setHorizontalHeaderItem(3,QtGui.QTableWidgetItem(hName))
-      hName='Значение'
-      self.tableW.setHorizontalHeaderItem(4,QtGui.QTableWidgetItem(hName))
-      hName='Ед. измерения'
-      self.tableW.setHorizontalHeaderItem(5,QtGui.QTableWidgetItem(hName))
+      if PCFlag==2:								   
+        self.tableW.setColumnCount(6)
+        self.tableW.setColumnWidth(0,190)
+        self.tableW.setColumnWidth(1,190)
+        self.tableW.setColumnWidth(2,190)
+        self.tableW.setColumnWidth(3,190)
+        self.tableW.setColumnWidth(4,190)
+        self.tableW.setColumnWidth(5,190)
+      
+        hName='Идентификатор'+'     '
+        self.tableW.setHorizontalHeaderItem(0,QtGui.QTableWidgetItem(hName))
+        hName='Дата и время'+'     '
+        self.tableW.setHorizontalHeaderItem(1,QtGui.QTableWidgetItem(hName))
+        hName='Вирт. прибор'+'     '
+        self.tableW.setHorizontalHeaderItem(2,QtGui.QTableWidgetItem(hName))
+        hName='Профиль'+'     '
+        self.tableW.setHorizontalHeaderItem(3,QtGui.QTableWidgetItem(hName))
+        hName='Значение'+'     '
+        self.tableW.setHorizontalHeaderItem(4,QtGui.QTableWidgetItem(hName))
+        hName='Ед. измерения'+'     '
+        self.tableW.setHorizontalHeaderItem(5,QtGui.QTableWidgetItem(hName))							   
+      if PCFlag==1:
+        hName='Идентификатор'
+        self.tableW.setHorizontalHeaderItem(0,QtGui.QTableWidgetItem(hName))
+        hName='Дата и время'
+        self.tableW.setHorizontalHeaderItem(1,QtGui.QTableWidgetItem(hName))
+        hName='Вирт. прибор'
+        self.tableW.setHorizontalHeaderItem(2,QtGui.QTableWidgetItem(hName))
+        hName='Профиль'
+        self.tableW.setHorizontalHeaderItem(3,QtGui.QTableWidgetItem(hName))
+        hName='Значение'
+        self.tableW.setHorizontalHeaderItem(4,QtGui.QTableWidgetItem(hName))
+        hName='Ед. измерения'
+        self.tableW.setHorizontalHeaderItem(5,QtGui.QTableWidgetItem(hName))
       
   def StartTable(self):
       """ Запуск таймера блокнота """

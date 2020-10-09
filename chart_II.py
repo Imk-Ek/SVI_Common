@@ -8,8 +8,9 @@ from PyQt4 import QtCore, QtGui
 import Results
 
 from PyQt4 import QtCore, QtGui 
-
-from fpChart_II import Ui_fpChart_II
+from common import PCFlag
+if PCFlag==1:from fpChart_II import Ui_fpChart_II
+if PCFlag==2:from fpChart_II_t import Ui_fpChart_II
 #####################################
 import math
 import sys

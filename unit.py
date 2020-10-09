@@ -3,7 +3,9 @@
 #import sys, traceback
 import logging
 from PyQt4 import QtCore, QtGui 
-from fpUnit import Ui_fpUnit
+from common import PCFlag
+if PCFlag==1: from fpUnit import Ui_fpUnit
+if PCFlag==2: from fpUnit_t import Ui_fpUnit
 from vinstr import CVInstr
 #LL = logging.getLogger('SVI')
 

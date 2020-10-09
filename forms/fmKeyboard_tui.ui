@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>fmKeyboard</class>
+ <widget class="QMainWindow" name="fmKeyboard">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>563</width>
+    <height>125</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>563</width>
+    <height>125</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>563</width>
+    <height>125</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Клавиатура</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QToolButton" name="tb_1">
+    <property name="geometry">
+     <rect>
+      <x>468</x>
+      <y>1</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_2">
+    <property name="geometry">
+     <rect>
+      <x>498</x>
+      <y>1</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>2</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_3">
+    <property name="geometry">
+     <rect>
+      <x>528</x>
+      <y>1</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>3</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_6">
+    <property name="geometry">
+     <rect>
+      <x>528</x>
+      <y>31</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>6</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_5">
+    <property name="geometry">
+     <rect>
+      <x>498</x>
+      <y>31</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>5</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_4">
+    <property name="geometry">
+     <rect>
+      <x>468</x>
+      <y>31</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>4</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_0">
+    <property name="geometry">
+     <rect>
+      <x>468</x>
+      <y>91</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_b">
+    <property name="geometry">
+     <rect>
+      <x>498</x>
+      <y>91</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_">
+    <property name="geometry">
+     <rect>
+      <x>528</x>
+      <y>91</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_9">
+    <property name="geometry">
+     <rect>
+      <x>528</x>
+      <y>61</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>9</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_8">
+    <property name="geometry">
+     <rect>
+      <x>498</x>
+      <y>61</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>8</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_7">
+    <property name="geometry">
+     <rect>
+      <x>468</x>
+      <y>61</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>7</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_e">
+    <property name="geometry">
+     <rect>
+      <x>93</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>e</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_w">
+    <property name="geometry">
+     <rect>
+      <x>63</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>w</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_q">
+    <property name="geometry">
+     <rect>
+      <x>33</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>q</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_r">
+    <property name="geometry">
+     <rect>
+      <x>123</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>r</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_t">
+    <property name="geometry">
+     <rect>
+      <x>153</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>t</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_y">
+    <property name="geometry">
+     <rect>
+      <x>183</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>y</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_sq2">
+    <property name="geometry">
+     <rect>
+      <x>363</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>]</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_i">
+    <property name="geometry">
+     <rect>
+      <x>243</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>i</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_u">
+    <property name="geometry">
+     <rect>
+      <x>213</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>u</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_p">
+    <property name="geometry">
+     <rect>
+      <x>303</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>p</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_o">
+    <property name="geometry">
+     <rect>
+      <x>273</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>o</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_sq1">
+    <property name="geometry">
+     <rect>
+      <x>333</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>[</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_ap">
+    <property name="geometry">
+     <rect>
+      <x>343</x>
+      <y>60</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>'</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_s">
+    <property name="geometry">
+     <rect>
+      <x>73</x>
+      <y>60</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>s</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_j">
+    <property name="geometry">
+     <rect>
+      <x>223</x>
+      <y>60</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>j</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_a">
+    <property name="geometry">
+     <rect>
+      <x>43</x>
+      <y>60</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>a</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_l">
+    <property name="geometry">
+     <rect>
+      <x>283</x>
+      <y>60</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>l</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_tz">
+    <property name="geometry">
+     <rect>
+      <x>313</x>
+      <y>60</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>;</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_f">
+    <property name="geometry">
+     <rect>
+      <x>133</x>
+      <y>60</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>f</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_h">
+    <property name="geometry">
+     <rect>
+      <x>193</x>
+      <y>60</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>h</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_k">
+    <property name="geometry">
+     <rect>
+      <x>253</x>
+      <y>60</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>k</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_d">
+    <property name="geometry">
+     <rect>
+      <x>103</x>
+      <y>60</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>d</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_g">
+    <property name="geometry">
+     <rect>
+      <x>163</x>
+      <y>60</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>g</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_b_2">
+    <property name="geometry">
+     <rect>
+      <x>173</x>
+      <y>90</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>b</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_m">
+    <property name="geometry">
+     <rect>
+      <x>233</x>
+      <y>90</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>m</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_x">
+    <property name="geometry">
+     <rect>
+      <x>83</x>
+      <y>90</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>x</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_v">
+    <property name="geometry">
+     <rect>
+      <x>143</x>
+      <y>90</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>v</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_z">
+    <property name="geometry">
+     <rect>
+      <x>53</x>
+      <y>90</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>z</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_c">
+    <property name="geometry">
+     <rect>
+      <x>113</x>
+      <y>90</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>c</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_n">
+    <property name="geometry">
+     <rect>
+      <x>203</x>
+      <y>90</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>n</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_t1">
+    <property name="geometry">
+     <rect>
+      <x>293</x>
+      <y>90</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_z1">
+    <property name="geometry">
+     <rect>
+      <x>263</x>
+      <y>90</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>,</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_d1">
+    <property name="geometry">
+     <rect>
+      <x>323</x>
+      <y>90</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>/</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_Ru_En">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>90</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ru/En</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_Caps">
+    <property name="geometry">
+     <rect>
+      <x>2</x>
+      <y>60</y>
+      <width>41</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Caps</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_Shift">
+    <property name="geometry">
+     <rect>
+      <x>1</x>
+      <y>90</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Shift</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="leText">
+    <property name="geometry">
+     <rect>
+      <x>1</x>
+      <y>2</y>
+      <width>461</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_Space">
+    <property name="geometry">
+     <rect>
+      <x>356</x>
+      <y>90</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_Del">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>60</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Del</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_tilda">
+    <property name="geometry">
+     <rect>
+      <x>3</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>~</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_minus">
+    <property name="geometry">
+     <rect>
+      <x>375</x>
+      <y>60</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>-</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_eq">
+    <property name="geometry">
+     <rect>
+      <x>397</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>+</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="tb_d2">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>:</string>
+    </property>
+   </widget>
+  </widget>
+  <action name="actConf">
+   <property name="text">
+    <string>Настройки</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

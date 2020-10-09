@@ -5,18 +5,33 @@ from PyQt4 import QtCore, QtGui
 from datetime import datetime
 from common import *
 from vp_classes import *
-from fmIonEdit import Ui_fmIonEdit
-from fpIon_2 import Ui_fpIon
-from fmICalib import Ui_fmICalib
-from fmSelectProfil_Ion import Ui_fmSelectProfil_Ion
 
-from fmIonDigitSelect import Ui_fmIonDigitSelect
-from fmIonMessage import Ui_fmIonMessage
-from fmIonMessageOK import Ui_fmIonMessageOK
-from fmIonMessSelect import Ui_fmIonMessSelect
-from fmIonSelect import Ui_fmIonSelect
-from fmIonProfilNameOK import Ui_fmIonProfilNameOK
-from fmOtherSettingV import Ui_fmOtherSettingV
+from common import PCFlag
+if PCFlag==1:
+  from fmIonEdit import Ui_fmIonEdit
+  from fpIon_2 import Ui_fpIon
+  from fmICalib import Ui_fmICalib
+  from fmSelectProfil_Ion import Ui_fmSelectProfil_Ion
+  from fmIonDigitSelect import Ui_fmIonDigitSelect
+  from fmIonMessage import Ui_fmIonMessage
+  from fmIonMessageOK import Ui_fmIonMessageOK
+  from fmIonMessSelect import Ui_fmIonMessSelect
+  from fmIonSelect import Ui_fmIonSelect
+  from fmIonProfilNameOK import Ui_fmIonProfilNameOK
+  from fmOtherSettingV import Ui_fmOtherSettingV
+if PCFlag==2:
+  from fmIonEdit_t import Ui_fmIonEdit
+  from fpIon_2_t import Ui_fpIon
+  from fmICalib_t import Ui_fmICalib
+  from fmSelectProfil_Ion_t import Ui_fmSelectProfil_Ion
+  from fmIonDigitSelect_t import Ui_fmIonDigitSelect
+  from fmIonMessage_t import Ui_fmIonMessage
+  from fmIonMessageOK_t import Ui_fmIonMessageOK
+  from fmIonMessSelect_t import Ui_fmIonMessSelect
+  from fmIonSelect_t import Ui_fmIonSelect
+  from fmIonProfilNameOK_t import Ui_fmIonProfilNameOK
+  from fmOtherSettingV_t import Ui_fmOtherSettingV
+
 from vinstr import *
 #LL = logging.getLogger('SVI')
 
@@ -264,8 +279,8 @@ class CIon(CVInstr):
     self.precD = 3
     self.formS = "{:"+str(self.widthD)+"."+str(self.precD)+"f}" 
 
-    self.widthD_2 = 5 # 4
-    self.precD_2 = 2  # 3
+    self.widthD_2 = 5 # 4  = 4 # 4
+    self.precD_2 = 2  # 3  = 1  # 3
     self.formS_2 = "{:"+str(self.widthD_2)+"."+str(self.precD_2)+"f}"
     self.profD = {}
     self.ManualT_Flag=0
@@ -543,7 +558,7 @@ class CfpIon(QtGui.QMainWindow, Ui_fpIon):
     self.fFreeze = False
     #self.lcdMain.setDigitCount(self.vIon.widthD + 2)
     self.lcdMain.setDigitCount(6)
-    self.lcdMain_2.setDigitCount(5)
+    self.lcdMain_2.setDigitCount(6)
     self.lcdMain_3.setDigitCount(5)
 
     self.cbEd_3.clear()
@@ -725,6 +740,12 @@ class CfmIonDigitSelect(QtGui.QMainWindow, Ui_fmIonDigitSelect):
     self.twIonDigitSelect_.clear()
     self.twIonDigitSelect_.setColumnCount(2)
     self.twIonDigitSelect_.setRowCount(3) 	
+    if PCFlag==2:
+        self.twIonDigitSelect_.setRowHeight(0,50)
+        self.twIonDigitSelect_.setRowHeight(1,50)
+        self.twIonDigitSelect_.setRowHeight(2,50)
+        self.twIonDigitSelect_.setColumnWidth(0,125)	
+        self.twIonDigitSelect_.setColumnWidth(1,125)									 
     while(m<=2):
         n=0
         while(n<=1):
@@ -910,7 +931,10 @@ class CfmIonMessSelect(QtGui.QMainWindow, Ui_fmIonMessSelect):
 
   def on_tbSelectKolIzm(self):
     if(self.vIon.IonGrad.KolIzm==0):
-        self.KolIzmIon=self.spinBox.value()
+        if PCFlag==1:
+           self.KolIzmIon=self.spinBox.value()
+        if PCFlag==2:
+           self.KolIzmIon=int(self.spinBox.text())
         if(self.KolIzmIon>0):
            self.SelKolIzm()
     q=0
@@ -974,8 +998,10 @@ class CfmIonSelect(QtGui.QMainWindow, Ui_fmIonSelect):
     self.twIonSelect.setColumnCount(5)
     self.twIonSelect.setRowCount(_row) 	
     while(m<=_row):
+        if PCFlag==2: self.twIonSelect.setRowHeight(m,5)								   
         n=0
         while(n<=4):
+            if PCFlag==2: 	self.twIonSelect.setColumnWidth(n,125)								  
             if(m*5+n<self.vIon.ProfilsDict['Иономер']['Ions_Table_All_Count']):
               newitem = QtGui.QTableWidgetItem()
               newitem.setText(self.vIon.IonDict[m*5+n][0])#+'A<sub>'+str(self.vIon.IonDict[m*5+n][2])+'</sub>')

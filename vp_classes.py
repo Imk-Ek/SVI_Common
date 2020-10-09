@@ -10,9 +10,14 @@ from vinstr import *
 
 #from common import *
 #для виртуальных приборов
-from fmProbaID import Ui_fmProbaID
-from fmAboutVP import Ui_fmAboutVP
-from fmMessage import Ui_fmMessage
+if PCFlag==1: 
+  from fmProbaID import Ui_fmProbaID
+  from fmAboutVP import Ui_fmAboutVP
+  from fmMessage import Ui_fmMessage
+if PCFlag==2: 
+  from fmProbaID_t import Ui_fmProbaID
+  from fmAboutVP_t import Ui_fmAboutVP
+  from fmMessage_t import Ui_fmMessage
 
 #from vinstr import *
 

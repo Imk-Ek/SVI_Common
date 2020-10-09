@@ -9,7 +9,8 @@ from PyQt4 import QtCore, QtGui
 from vp_classes import *
 import Results
 #from fpPressure import Ui_fpPressure  
-from fpVATP import Ui_fpVATP
+if PCFlag==1:from fpVATP import Ui_fpVATP
+if PCFlag==2:from fpVATP_t import Ui_fpVATP
 from vinstr import CVInstr
 
 #LL = logging.getLogger('SVI')
@@ -101,6 +102,9 @@ class CPressure(CVInstr):
 
 
   def NewData(self, ddata):
+    if (self.vCE.Close_Config_Flag==1)and(self.closeFlag==0): 
+          self.closeFlag=1      
+          self.win.close()														  
     if self.measP in ddata:
       self.win.lcdMain.display(self.formS.format(ddata[self.measP][1]))
       self.win.lblEd.setText(self.Р_ed)
@@ -122,7 +126,9 @@ class CPressure(CVInstr):
           self.win.close()
 
   def NewDataTimer(self):
-    
+   if (self.vCE.Close_Config_Flag==1)and(self.closeFlag==0): 
+          self.closeFlag=1      
+          self.win.close() 
    if(self.ParamMess=='1'): 
     
       self.lastP =8
@@ -193,6 +199,8 @@ class CfpPressure(QtGui.QMainWindow, Ui_fpVATP):
     self.actTech.triggered.connect(self.on_AboutVP_toggle)  
     self.menubar.addAction(self.actTech)
     ## End of common menu of VP
+    self.trAutoScan =None
+    self.trAutoScan = self.startTimer(1000) 						
     
 
   def on_Chart_View(self):

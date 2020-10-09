@@ -3,14 +3,16 @@ import sys, traceback
 import logging
 
 from PyQt4 import QtCore, QtGui 
-from fmChangeVPribors import Ui_fmChangeVPribors
+from common import *
+if PCFlag==1:from fmChangeVPribors import Ui_fmChangeVPribors
+if PCFlag==2:from fmChangeVPribors_t import Ui_fmChangeVPribors
 import math
 import sys
 import numpy
 from PyQt4 import Qt
 import PyQt4.Qwt5 as Qwt
 import sstate
-from common import *
+
 import Results
 
 # ---------------------------------------------- 

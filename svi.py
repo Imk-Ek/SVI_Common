@@ -17,7 +17,50 @@ import log # дополнительные возможности логиров�
 import logging
 from struct import Struct
 from PyQt4 import QtCore, QtGui 
-from chart_II import*
+#from chart_II import*
+
+if PCFlag==1:
+   from fmNaladka import Ui_fmNaladka
+   from fmPortCons import Ui_fmPortCons
+   from fmMBCons import Ui_fmMBCons
+   from fmNewReg import Ui_dgNewReg
+   from fmAD779x import Ui_fmAD779x
+   from fmVPar import Ui_fmVPar
+   from fmNewConv import Ui_fmNewConv
+   from fmVConf import Ui_fmVConf
+   from fmTPar import Ui_fmTPar
+   from fmTConf import Ui_fmTConf 
+   from fmTPPar import Ui_fmTPPar
+   from fmTPConf import Ui_fmTPConf 
+   from fmCondPar import Ui_fmCondPar
+   from fmCondConf import Ui_fmCondConf 
+   from fmAmperPar import Ui_fmAmperPar
+   from fmAmperConf import Ui_fmAmperConf 
+   from fmMain import Ui_fmMain
+   from fmChangeVPribors import Ui_fmChangeVPribors
+   from fmSelectProfil import Ui_fmSelectProfil
+if PCFlag==2:
+   from fmNaladka_t import Ui_fmNaladka
+   from fmPortCons_t import Ui_fmPortCons
+   from fmMBCons_t import Ui_fmMBCons
+   from fmNewReg_t import Ui_dgNewReg
+   from fmAD779x_t import Ui_fmAD779x
+   from fmVPar_t import Ui_fmVPar
+   from fmNewConv_t import Ui_fmNewConv
+   from fmVConf_t import Ui_fmVConf
+   from fmTPar_t import Ui_fmTPar
+   from fmTConf_t import Ui_fmTConf 
+   from fmTPPar_t import Ui_fmTPPar
+   from fmTPConf_t import Ui_fmTPConf 
+   from fmCondPar_t import Ui_fmCondPar
+   from fmCondConf_t import Ui_fmCondConf 
+   from fmAmperPar_t import Ui_fmAmperPar
+   from fmAmperConf_t import Ui_fmAmperConf 
+   from fmMain_t import Ui_fmMain
+   from fmChangeVPribors_t import Ui_fmChangeVPribors
+   from fmSelectProfil_t import Ui_fmSelectProfil
+
+from vinstr import *
 
 from unit import*
 from Inputunit_ import*
@@ -30,31 +73,13 @@ from volt import*
 from temperature import*
 from notepad import*
 from protokol import*
+from Arrow_Pr import*					 
 from config_edit import*
 import Results
 import AllResults
 import time
 
-from fmNaladka import Ui_fmNaladka
-from fmPortCons import Ui_fmPortCons
-from fmMBCons import Ui_fmMBCons
-from fmNewReg import Ui_dgNewReg
-from fmAD779x import Ui_fmAD779x
-from fmVPar import Ui_fmVPar
-from fmNewConv import Ui_fmNewConv
-from fmVConf import Ui_fmVConf
-from fmTPar import Ui_fmTPar
-from fmTConf import Ui_fmTConf 
-from fmTPPar import Ui_fmTPPar
-from fmTPConf import Ui_fmTPConf 
-from fmCondPar import Ui_fmCondPar
-from fmCondConf import Ui_fmCondConf 
-from fmAmperPar import Ui_fmAmperPar
-from fmAmperConf import Ui_fmAmperConf 
-from fmMain import Ui_fmMain
-from fmChangeVPribors import Ui_fmChangeVPribors
-from fmSelectProfil import Ui_fmSelectProfil
-from vinstr import *
+
 from filtr import filtrP
 import Results
 
@@ -7016,6 +7041,9 @@ def SVIstart():
 
 #----------------------------------------------
 def main(argv):
+  #PCFlag=1
+
+   
 
   global fTech     # флаг технологического режима
   global fTechLoad     # флаг технологического режима

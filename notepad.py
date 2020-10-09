@@ -5,7 +5,9 @@ import subprocess
 import Results
 from PyQt4 import QtCore, QtGui 
 from datetime import datetime
-from fmNotepad import Ui_fmNotepad
+from common import PCFlag
+if PCFlag==1: from fmNotepad import Ui_fmNotepad
+if PCFlag==2: from fmNotepad_t import Ui_fmNotepad
 from vinstr import CVInstr
 #LL = logging.getLogger('SVI')
 
@@ -52,6 +54,7 @@ class CNotepad(CVInstr):
     self.precD = 3  # 3
     self.formS = "{:"+str(self.widthD)+"."+str(self.precD)+"f}"
     self.win = CfmNotepad(self.widthD + 1, self)
+    self.winAboutVP =CfmAboutVP(self)								 
     self.win.InitTable()
     self.win.StartTable()
     self.dSize=dSize
@@ -130,9 +133,13 @@ class CfmNotepad(QtGui.QMainWindow, Ui_fmNotepad):
     self.Type=2
     self.Reset_Flag=1
     self.timer = QtCore.QTimer()
-    self.timer.timeout.connect(self.on_Timer_toggle)    
-    self.spinBox.valueChanged.connect(self.on_Timer_value_Changed)
-    self.spinBox.setValue(1)
+    self.timer.timeout.connect(self.on_Timer_toggle)  
+    if PCFlag==1:
+      self.spinBox.valueChanged.connect(self.on_Timer_value_Changed)
+      self.spinBox.setValue(1)
+    if PCFlag==2:	
+      self.spinBox.editingFinished.connect(self.on_Timer_value_Changed)
+      self.spinBox.setText('1')
     self.timer.start(1000)
     self.btnSave.clicked.connect(self.on_btnSave)
     self.btnClear.clicked.connect(self.on_btnClear)
@@ -141,14 +148,18 @@ class CfmNotepad(QtGui.QMainWindow, Ui_fmNotepad):
       """ Инициализация таблицы блокнота  """
       tmpi=0
       self.tableW.setColumnCount(1)
-      hName='Дата и время'
+      self.tableW.setColumnWidth(0,190)
+      hName='Дата и время'+'     '
       self.tableW.setHorizontalHeaderItem(0,QtGui.QTableWidgetItem(hName))
       while(tmpi<3):
           if(self.vNotepad.InputVal[tmpi]!='0'):
-              hName=self.vNotepad.InputUnit[tmpi]+', '+self.vNotepad.InputVal_ParName[tmpi]
+              hName=self.vNotepad.InputUnit[tmpi]+', '+self.vNotepad.InputVal_ParName[tmpi]+'     '
               self.tableW.setColumnCount(tmpi*2+3)
+              self.tableW.setColumnWidth(1+tmpi*3,190)
+              self.tableW.setColumnWidth(1+tmpi*3+1,190)
+              self.tableW.setColumnWidth(1+tmpi*3+2,190)
               self.tableW.setHorizontalHeaderItem(tmpi*2+1,QtGui.QTableWidgetItem(hName))
-              hName='Ед.изм.'
+              hName='Ед.изм.'+'     '
               self.tableW.setHorizontalHeaderItem(tmpi*2+2,QtGui.QTableWidgetItem(hName))
           tmpi=tmpi+1
           self.vNotepad.InputVal[0]=self.vNotepad.dSize['VPChNameList'][0]
@@ -159,7 +170,10 @@ class CfmNotepad(QtGui.QMainWindow, Ui_fmNotepad):
 
   def on_Timer_value_Changed(self):
       """ Событие таймера"""
-      tmpi=self.spinBox.value()*1000
+      if PCFlag==1:
+        tmpi=self.spinBox.value()*1000
+      if PCFlag==2:
+        tmpi=int(self.spinBox.text())*1000
       self.timer.setInterval(tmpi)
 
   def on_btnSave(self):

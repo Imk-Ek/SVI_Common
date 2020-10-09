@@ -3,7 +3,9 @@
 import logging
 from PyQt4 import QtCore, QtGui 
 import Results
-from fpInputUnit import Ui_fpInputUnit
+from common import PCFlag
+if PCFlag==1: from fpInputUnit import Ui_fpInputUnit
+if PCFlag==2: from fpInputUnit_t import Ui_fpInputUnit
 from vinstr import CVInstr
 #LL = logging.getLogger('SVI')
 
@@ -41,6 +43,9 @@ class CInputUnit_(CVInstr):
     self.dSize=dSize
     self.win = CfpInputUnit(self.widthD + 1, self)
     self.LoadState()
+    self.win.tmpVal1=self.win.leVal1.setText('0')
+    self.win.tmpVal2=self.win.leVal2.setText('0')
+    self.win.tmpVal3=self.win.leVal3.setText('0')				 
     rect = QtCore.QRect()
     self.win.width=self.dSize.setdefault('width',100)
     self.win.height=self.dSize.setdefault('height',100)
@@ -52,7 +57,7 @@ class CInputUnit_(CVInstr):
     rect.setTop(self.win.y)    
     self.win.setGeometry(rect)
     self.trAutoScan =None
-    self.trAutoScan = self.startTimer(1000)
+    #self.trAutoScan = self.startTimer(1000)
         
   def LoadState(self):
     super().LoadState()
@@ -67,9 +72,18 @@ class CInputUnit_(CVInstr):
       self.tmpVal=ddata[self.measN][1]
 
   def Proceed(self):
-    Results.Result_Dict[self.Name][self.OutputVal[0]]=self.tmpVal1
-    Results.Result_Dict[self.Name][self.OutputVal[1]]=self.tmpVal2
-    Results.Result_Dict[self.Name][self.OutputVal[2]]=self.tmpVal3
+    Results.Result_Dict[self.Name][self.OutputVal[0]]=float(self.tmpVal1)
+    Results.Result_Dict[self.Name][self.OutputVal[1]]=int(self.tmpVal2)
+    Results.Result_Dict[self.Name][self.OutputVal[2]]=int(self.tmpVal3)
+
+    Results.Result_Dict[self.Name]['Параметр '+self.OutputVal[0]]='П.1'
+    Results.Result_Dict[self.Name]['Единица '+self.OutputVal[0]]='ед.1.'
+
+    Results.Result_Dict[self.Name]['Параметр '+self.OutputVal[1]]='П.2'
+    Results.Result_Dict[self.Name]['Единица '+self.OutputVal[1]]='ед.2.'
+
+    Results.Result_Dict[self.Name]['Параметр '+self.OutputVal[2]]='П.3'
+    Results.Result_Dict[self.Name]['Единица '+self.OutputVal[2]]='ед.3.'	 
     q=1
 
 #---

@@ -5,17 +5,24 @@ from datetime import datetime
 
 from common import *
 from vp_classes import *
-from fpCond_1 import Ui_fpCond
-from fpCond_2 import Ui_fpCond_Compact
-#from fpCond_3 import Ui_fpCond_Compact
-#from fpR_Band import Ui_fpR_Band
-from fpVATP import Ui_fpVATP
-from fmCondCalib1 import Ui_fmCondCalib
-from fmSelectProfil import Ui_fmSelectProfil
-from fmVPPassword import Ui_fmVPPassword
-
-from fmSelectV import Ui_fmSelectV
-from fmTKR import Ui_fmTKR
+if PCFlag==1:
+  from fpCond_1 import Ui_fpCond
+  from fpCond_2 import Ui_fpCond_Compact
+  from fpVATP import Ui_fpVATP
+  from fmCondCalib1 import Ui_fmCondCalib
+  from fmSelectProfil import Ui_fmSelectProfil
+  from fmVPPassword import Ui_fmVPPassword
+  from fmSelectV import Ui_fmSelectV
+  from fmTKR import Ui_fmTKR
+if PCFlag==2:
+  from fpCond_1_t import Ui_fpCond
+  from fpCond_2_t import Ui_fpCond_Compact
+  from fpVATP_t import Ui_fpVATP
+  from fmCondCalib1_t import Ui_fmCondCalib
+  from fmSelectProfil_t import Ui_fmSelectProfil
+  from fmVPPassword_t import Ui_fmVPPassword
+  from fmSelectV_t import Ui_fmSelectV
+  from fmTKR_t import Ui_fmTKR
 
 from vinstr import *
 #LL = logging.getLogger('SVI')
@@ -991,25 +998,48 @@ class CfmCondCalib(QtGui.QMainWindow, Ui_fmCondCalib):
     self.leCondSet.setEnabled(False)
     self.lblKD6_2.setEnabled(False)
     self.tbRecalc.setEnabled(False)
-    self.leB_1.valueChanged.connect(self.on_Change_Any) 
-    self.leB_2.valueChanged.connect(self.on_Change_Any)
-    self.leB_3.valueChanged.connect(self.on_Change_Any)
-    self.leB_4.valueChanged.connect(self.on_Change_Any)
-    self.leB_5.valueChanged.connect(self.on_Change_Any)
-    self.leB_6.valueChanged.connect(self.on_Change_Any)
-    self.leA_1.valueChanged.connect(self.on_Change_Any)
-    self.leA_2.valueChanged.connect(self.on_Change_Any)
-    self.leA_3.valueChanged.connect(self.on_Change_Any)
-    self.leA_4.valueChanged.connect(self.on_Change_Any)
-    self.leA_5.valueChanged.connect(self.on_Change_Any)
-    self.leA_6.valueChanged.connect(self.on_Change_Any)
-    self.leKu_.valueChanged.connect(self.on_Change_Any) 
-    self.leKu_1_.valueChanged.connect(self.on_Change_Any) 
-    self.leKu_2_.valueChanged.connect(self.on_Change_Any) 
-    self.leKu_3_.valueChanged.connect(self.on_Change_Any) 
-    self.leKu_4_.valueChanged.connect(self.on_Change_Any) 
-    self.leKu_5_.valueChanged.connect(self.on_Change_Any) 
-    self.leKu_6_.valueChanged.connect(self.on_Change_Any) 
+    if PCFlag==1:
+      self.leB_1.valueChanged.connect(self.on_Change_Any) 
+      self.leB_2.valueChanged.connect(self.on_Change_Any)
+      self.leB_3.valueChanged.connect(self.on_Change_Any)
+      self.leB_4.valueChanged.connect(self.on_Change_Any)
+      self.leB_5.valueChanged.connect(self.on_Change_Any)
+      self.leB_6.valueChanged.connect(self.on_Change_Any)
+      self.leA_1.valueChanged.connect(self.on_Change_Any)
+      self.leA_2.valueChanged.connect(self.on_Change_Any)
+      self.leA_3.valueChanged.connect(self.on_Change_Any)
+      self.leA_4.valueChanged.connect(self.on_Change_Any)
+      self.leA_5.valueChanged.connect(self.on_Change_Any)
+      self.leA_6.valueChanged.connect(self.on_Change_Any)
+      self.leKu_.valueChanged.connect(self.on_Change_Any) 
+      self.leKu_1_.valueChanged.connect(self.on_Change_Any) 
+      self.leKu_2_.valueChanged.connect(self.on_Change_Any) 
+      self.leKu_3_.valueChanged.connect(self.on_Change_Any) 
+      self.leKu_4_.valueChanged.connect(self.on_Change_Any) 
+      self.leKu_5_.valueChanged.connect(self.on_Change_Any) 
+      self.leKu_6_.valueChanged.connect(self.on_Change_Any) 
+    if PCFlag==2: 
+      self.leB_1.textChanged.connect(self.on_Change_Any) 
+      self.leB_2.textChanged.connect(self.on_Change_Any)
+      self.leB_3.textChanged.connect(self.on_Change_Any)
+      self.leB_4.textChanged.connect(self.on_Change_Any)
+      self.leB_5.textChanged.connect(self.on_Change_Any)
+      self.leB_6.textChanged.connect(self.on_Change_Any)
+      self.leA_1.textChanged.connect(self.on_Change_Any)
+      self.leA_2.textChanged.connect(self.on_Change_Any)
+      self.leA_3.textChanged.connect(self.on_Change_Any)
+      self.leA_4.textChanged.connect(self.on_Change_Any)
+      self.leA_5.textChanged.connect(self.on_Change_Any)
+      self.leA_6.textChanged.connect(self.on_Change_Any)
+      self.leKu_.textChanged.connect(self.on_Change_Any) 
+      #self.leKu_.
+      self.leKu_1_.textChanged.connect(self.on_Change_Any) 
+      self.leKu_2_.textChanged.connect(self.on_Change_Any) 
+      self.leKu_3_.textChanged.connect(self.on_Change_Any) 
+      self.leKu_4_.textChanged.connect(self.on_Change_Any) 
+      self.leKu_5_.textChanged.connect(self.on_Change_Any) 
+      self.leKu_6_.textChanged.connect(self.on_Change_Any) 
+    
     self.leDescr_.textChanged.connect(self.on_Change_Any) 
     self.leCond_min.textChanged.connect(self.on_Change_Any) 
     self.leCond_max.textChanged.connect(self.on_Change_Any) 
@@ -1082,25 +1112,46 @@ class CfmCondCalib(QtGui.QMainWindow, Ui_fmCondCalib):
         Cond_min=0.0
         Cond_max=0.0
         #B=self.leB_.value()
-        Kya=self.leKu_.value()
-        Kd1=self.leKu_1_.value()
-        Kd2=self.leKu_2_.value()
-        Kd3=self.leKu_3_.value()
-        Kd4=self.leKu_4_.value()
-        Kd5=self.leKu_5_.value()
-        Kd6=self.leKu_6_.value()
-        B1=self.leB_1.value()
-        B2=self.leB_2.value()
-        B3=self.leB_3.value()
-        B4=self.leB_4.value()
-        B5=self.leB_5.value()   
-        B6=self.leB_6.value()
-        A1=self.leA_1.value()
-        A2=self.leA_2.value()
-        A3=self.leA_3.value()
-        A4=self.leA_4.value()
-        A5=self.leA_5.value()
-        A6=self.leA_6.value()
+        if PCFlag==1:
+          Kya=self.leKu_.value()
+          Kd1=self.leKu_1_.value()
+          Kd2=self.leKu_2_.value()
+          Kd3=self.leKu_3_.value()
+          Kd4=self.leKu_4_.value()
+          Kd5=self.leKu_5_.value()
+          Kd6=self.leKu_6_.value()
+          B1=self.leB_1.value()
+          B2=self.leB_2.value()
+          B3=self.leB_3.value()
+          B4=self.leB_4.value()
+          B5=self.leB_5.value()   
+          B6=self.leB_6.value()
+          A1=self.leA_1.value()
+          A2=self.leA_2.value()
+          A3=self.leA_3.value()
+          A4=self.leA_4.value()
+          A5=self.leA_5.value()
+          A6=self.leA_6.value()
+        if PCFlag==2:
+          Kya=float(self.leKu_.text())
+          Kd1=float(self.leKu_1_.text())
+          Kd2=float(self.leKu_2_.text())
+          Kd3=float(self.leKu_3_.text())
+          Kd4=float(self.leKu_4_.text())
+          Kd5=float(self.leKu_5_.text())
+          Kd6=float(self.leKu_6_.text())
+          B1=float(self.leB_1.text())
+          B2=float(self.leB_2.text())
+          B3=float(self.leB_3.text())
+          B4=float(self.leB_4.text())
+          B5=float(self.leB_5.text())   
+          B6=float(self.leB_6.text())
+          A1=float(self.leA_1.text())
+          A2=float(self.leA_2.text())
+          A3=float(self.leA_3.text())
+          A4=float(self.leA_4.text())
+          A5=float(self.leA_5.text())
+          A6=float(self.leA_6.text())
         Cond_min=float(self.leCond_min.text())
         Cond_max=float(self.leCond_max.text())
         PrName=self.leProfilName_.text()
@@ -1111,19 +1162,20 @@ class CfmCondCalib(QtGui.QMainWindow, Ui_fmCondCalib):
 
 
   def on_Init_Any(self):
-      #self.leB_.setValue(self.vCond.Profils.B)
-      self.leKu_.setValue(self.vCond.Profils.Kya)
-      self.leKu_1_.setValue(self.vCond.Profils.Kd1)
-      self.leKu_2_.setValue(self.vCond.Profils.Kd2)
-      self.leKu_3_.setValue(self.vCond.Profils.Kd3)
-      self.leKu_4_.setValue(self.vCond.Profils.Kd4)
-      self.leKu_5_.setValue(self.vCond.Profils.Kd5)
-      self.leKu_6_.setValue(self.vCond.Profils.Kd6)
-      try:
+      if PCFlag==1:
+       #self.leB_.setValue(self.vCond.Profils.B)
+       self.leKu_.setValue(self.vCond.Profils.Kya)
+       self.leKu_1_.setValue(self.vCond.Profils.Kd1)
+       self.leKu_2_.setValue(self.vCond.Profils.Kd2)
+       self.leKu_3_.setValue(self.vCond.Profils.Kd3)
+       self.leKu_4_.setValue(self.vCond.Profils.Kd4)
+       self.leKu_5_.setValue(self.vCond.Profils.Kd5)
+       self.leKu_6_.setValue(self.vCond.Profils.Kd6)
+       try:
         self.leB_6.setValue(self.vCond.Profils.B6)
-      except: self.leB_6.setValue(0.0)
+       except: self.leB_6.setValue(0.0)
 
-      try:
+       try:
         self.leB_5.setValue(self.vCond.Profils.B5)
         self.leB_4.setValue(self.vCond.Profils.B4)
         self.leB_3.setValue(self.vCond.Profils.B3)
@@ -1136,7 +1188,7 @@ class CfmCondCalib(QtGui.QMainWindow, Ui_fmCondCalib):
         self.leA_3.setValue(self.vCond.Profils.A3)
         self.leA_2.setValue(self.vCond.Profils.A2)
         self.leA_1.setValue(self.vCond.Profils.A1)
-      except: 
+       except: 
         self.leB_5.setValue(0.0)
         self.leB_4.setValue(0.0)
         self.leB_3.setValue(0.0)
@@ -1149,6 +1201,45 @@ class CfmCondCalib(QtGui.QMainWindow, Ui_fmCondCalib):
         self.leA_3.setValue(0.0)
         self.leA_2.setValue(0.0)
         self.leA_1.setValue(0.0)
+      if PCFlag==2:
+        self.leKu_.setText('{:.3f}'.format(self.vCond.Profils.Kya,3))
+        self.leKu_1_.setText('{:.6f}'.format(self.vCond.Profils.Kd1))#!s:.8
+        self.leKu_2_.setText('{:.6f}'.format(self.vCond.Profils.Kd2))
+        self.leKu_3_.setText('{:.6f}'.format(self.vCond.Profils.Kd3))
+        self.leKu_4_.setText('{:.6f}'.format(self.vCond.Profils.Kd4))
+        self.leKu_5_.setText('{:.6f}'.format(self.vCond.Profils.Kd5))
+        self.leKu_6_.setText('{:.6f}'.format(self.vCond.Profils.Kd6))
+        try:
+          self.leB_6.setText('{:.6f}'.format(self.vCond.Profils.B6))
+        except: self.leB_6.setText(str(0.0))
+
+        try:
+          self.leB_5.setText('{:.9f}'.format(self.vCond.Profils.B5))# !s:.15
+          self.leB_4.setText('{:.9f}'.format(self.vCond.Profils.B4))
+          self.leB_3.setText('{:.9f}'.format(self.vCond.Profils.B3))
+          self.leB_2.setText('{:.9f}'.format(self.vCond.Profils.B2))
+          self.leB_1.setText('{:.9f}'.format(self.vCond.Profils.B1))
+
+          self.leA_6.setText('{:.9f}'.format(self.vCond.Profils.A6))
+          self.leA_5.setText('{:.9f}'.format(self.vCond.Profils.A5))
+          self.leA_4.setText('{:.9f}'.format(self.vCond.Profils.A4))
+          self.leA_3.setText('{:.9f}'.format(self.vCond.Profils.A3))
+          self.leA_2.setText('{:.9f}'.format(self.vCond.Profils.A2))
+          self.leA_1.setText('{:.9f}'.format(self.vCond.Profils.A1))
+        except: 
+          self.leB_5.setText(str(0.0))
+          self.leB_4.setText(str(0.0))
+          self.leB_3.setText(str(0.0))
+          self.leB_2.setText(str(0.0))
+          self.leB_1.setText(str(0.0))
+
+          self.leA_6.setText(str(0.0))
+          self.leA_5.setText(str(0.0))
+          self.leA_4.setText(str(0.0))
+          self.leA_3.setText(str(0.0))
+          self.leA_2.setText(str(0.0))
+          self.leA_1.setText(str(0.0))
+	  
       try:
         self.leCond_min.setText('{:.6f}'.format(self.vCond.Profils.Cond_min))
         self.leCond_max.setText('{:.6f}'.format(self.vCond.Profils.Cond_max))
