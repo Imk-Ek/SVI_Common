@@ -41,4 +41,4 @@ def  smartShow(win, *args, **kw):
   #win.show()
 
 # Флаг версии для ПК
-PCFlag=2
+PCFlag=1
