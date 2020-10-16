@@ -440,7 +440,7 @@ class CIon(CVInstr):
           self.closeFlag=1      
           self.win.close()
           self.timerM.stop()
-          self. delete()
+          #self. delete()
 
           a=0
 

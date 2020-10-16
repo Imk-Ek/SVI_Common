@@ -2020,6 +2020,8 @@ class CCond(CVInstr):
     self.timerM.start(100)
 
   def NewDataTimerM(self):
+      #Начальная инициализация выходной величины
+      self.tmpVal_R=0
       q=0
       a=datetime.today()
       a1=a.date()
@@ -2367,7 +2369,7 @@ class CCond(CVInstr):
           self.closeFlag=1
           self.timerM.stop()      
           self.win.close()
-          self.delete()
+          #self.delete()
           a=0
           
 
@@ -2564,7 +2566,10 @@ class CR_Band(CVInstr,CSaveRes):
     self.winMessage =CfmMessage(self)
     self.win = CfpR_Band(self.widthD + 1, self)
     self.LoadState()
-
+    #Создания словаря результатов
+    Results.Result_Dict[self.Name]={}
+    #Создания в словаре результатов переменной записи в блокнот
+    Results.Result_Dict[self.Name]['В блокнот']=0
     self.timerM = QtCore.QTimer()
     self.timerM.timeout.connect(self.NewDataTimerM)
     self.timerM.start(100)
@@ -2704,9 +2709,11 @@ class CR_Band(CVInstr,CSaveRes):
 
 
       if (self.vCE.Close_Config_Flag==1)and(self.closeFlag==0): 
+          # Остановка таймера опроса
+          self.timerM.stop();
           self.closeFlag=1      
           self.win.close()
-          self.delete()
+          #self.delete()
           a=0
 
 class CfpR_Band(QtGui.QMainWindow, Ui_fpVATP):
@@ -2764,7 +2771,7 @@ class CfpR_Band(QtGui.QMainWindow, Ui_fpVATP):
         if (self.vR_Band.vCE.Close_Config_Flag==1)and(self.vR_Band.closeFlag==0): 
           self.vR_Band.closeFlag=1      
           self.close()
-          self.delete()
+          #self.delete()
           a=0
 
 

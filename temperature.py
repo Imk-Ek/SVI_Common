@@ -39,6 +39,8 @@ class CTemp(CVInstr):
     self.LastProfil=''
     self.UpdateFlag=0				 
     Results.Result_Dict[self.Name][self.OutputVal[0]]=0
+    Results.Result_Dict[self.InputUnit[0]]={}
+    Results.Result_Dict[self.InputUnit[0]][self.InputVal[0]]=0
     # TODO обработку ошибок конфигурации
     if(self.ParamMess=='0'):
       self.measT = self.dictCfg["каналТемпература"]
@@ -117,7 +119,10 @@ class CTemp(CVInstr):
           self.win.close() 
    if(self.ParamMess=='0'): 
      #if self.measT in ddata:
+         #Отображение результата и отправка на выход   
          self.win.lcdMain.display(self.formS.format(self.tt))
+         Results.Result_Dict[self.Name][self.OutputVal[0]]=self.tt
+         self.lastT=Results.Result_Dict[self.InputUnit[0]][self.InputVal[0]]
          self.win.lblEd.setText(self.Temp_ed)
    if(self.ParamMess=='1'): 
     
@@ -125,6 +130,7 @@ class CTemp(CVInstr):
       self.lastT=Results.Result_Dict[self.InputUnit[0]][self.InputVal[0]]
 
       self.win.lcdMain.display(self.formS.format(self.lastT))
+      Results.Result_Dict[self.Name][self.OutputVal[0]]=self.tmpVal
       self.win.lblEd.setText(self.Temp_ed)
       self.tmpVal=self.lastT
       self.timeT =0 #ddata[self.measI][2] 

@@ -1,5 +1,4 @@
-﻿
-import logging
+﻿import logging
 from PyQt4 import QtCore, QtGui 
 from common import PCFlag
 if PCFlag==1:from fpVATP import Ui_fpVATP
@@ -186,7 +185,8 @@ class CfpAmper(QtGui.QMainWindow, Ui_fpVATP):
   #Отображение даты по таймеру
         if (self.vAmper.vCE.Close_Config_Flag==1)and(self.vAmper.closeFlag==0): 
           self.vAmper.closeFlag=1  
-          self.timer.stop()    
+          #Остановка таймера опроса амперметра
+          #self.vAmper.timer.stop()    
           self.close()
 
 

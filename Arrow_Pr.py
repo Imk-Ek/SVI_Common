@@ -125,7 +125,10 @@ class CArrow_Pr(CVInstr):
 
     if(self.InputUnit[0]!='0'):
         self.tmpVal=Results.Result_Dict[self.InputUnit[0]][self.InputVal[0]]
-        self.tmpVal_Ed=Results.Result_Dict[self.InputUnit[0]]['Единица '+self.InputVal[0]]
+        #Проверка наличия записи единицы измерения
+        key='Единица '+self.InputVal[0]
+        key_exists = key in Results.Result_Dict[self.InputUnit[0]]
+        if key_exists: self.tmpVal_Ed=Results.Result_Dict[self.InputUnit[0]]['Единица '+self.InputVal[0]]
         self.win.zw4.setValue(self.tmpVal)
         self.win.zw4.ed_=self.tmpVal_Ed
         #self.win.zw4.ed_=self.vCE._EdIzm
@@ -256,7 +259,8 @@ class CfpArrow_Pr(QtGui.QMainWindow, Ui_fpArrow_Pr):
   def resizeEvent(self, event):
     """ событие изменения размера окна """
     super().resizeEvent(event)
-    self.zw4.setGeometry(QtCore.QRect(0, 0, self.width, self.height))
+    coord=QtCore.QRect(0, 0, self.width(), self.height())
+    self.zw4.setGeometry(coord)
 
   def on_Timer_toggle(self):
     """ событие основного таймера   """
@@ -265,7 +269,7 @@ class CfpArrow_Pr(QtGui.QMainWindow, Ui_fpArrow_Pr):
           self.vCE.closeFlag=1      
           self.close()
           self.timer.stop()
-          self.delete()
+          #self.delete()
           a=0
 
   def on_AboutVP_toggle(self):

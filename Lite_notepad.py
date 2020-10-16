@@ -202,7 +202,7 @@ class CfmLiteNotepad(QtGui.QMainWindow, Ui_fmLiteNotepad):
           self.vNotepad.closeFlag=1  
           self.timer.stop()    
           self.close()
-          self.delete()
+          #self.delete()
           a=1
 
   def InitTable(self):

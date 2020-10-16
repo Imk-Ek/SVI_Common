@@ -6,6 +6,7 @@ import Results
 from PyQt4 import QtCore, QtGui 
 from datetime import datetime
 from common import PCFlag
+from vp_classes import *
 if PCFlag==1: from fmNotepad import Ui_fmNotepad
 if PCFlag==2: from fmNotepad_t import Ui_fmNotepad
 from vinstr import CVInstr
@@ -247,5 +248,5 @@ class CfmNotepad(QtGui.QMainWindow, Ui_fmNotepad):
           self.vNotepad.closeFlag=1      
           self.close()
           self.timer.stop()
-          self.delete()
+          #self.delete()
           a=0

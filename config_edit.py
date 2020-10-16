@@ -408,10 +408,10 @@ class CfmProgramming_1_1(QtGui.QMainWindow, Ui_fmProgramming_1_1):
     self.twDBNum_.resizeColumnsToContents()
 
 
-
+#Окно заставки
 class CfmWelcome(QtGui.QMainWindow, Ui_fmWelcome):
   """ Начальное окно программы """
-
+  #Инициализация окна заставки
   def __init__(self,vCE):
     """ Инициализация основного окна """
     global vinstrD
@@ -427,24 +427,13 @@ class CfmWelcome(QtGui.QMainWindow, Ui_fmWelcome):
     self.timer = QtCore.QTimer()
     self.timer.timeout.connect(self.on_tbSelectConfigWindow_toggle)
     self.timer.start(3000)
-    #self.tbSelectConfigWindow.clicked.connect(self.on_tbSelectConfigWindow_toggle)
 
-    
-    #self.tbSetting.clicked.connect(self.on_tbSetting_toggle)
-    #self.tbLoadLastConfig.clicked.connect(self.on_tbLoadLastConfig_toggle)
-    #self.tbSettings.clicked.connect(self.on_tbSettings_toggle)
-    #self.tbCloseConfig.clicked.connect(self.on_tbCloseConfig_toggle)
-
-    
-
-
-
-  
+  #Отображение океа
   def show(self):
     """ Показ основного окна """
-    super().show()
-    q=0      
+    super().show()     
 
+  #Кнопка выбора конфигурации
   def on_tbSelectConfigWindow_toggle(self):
      """ Кнопка выбора окна выбора  конфигурации """
      try:
@@ -483,28 +472,31 @@ class CfmWelcome(QtGui.QMainWindow, Ui_fmWelcome):
 
 
 
-
+#Форма выбора  загружаемой конфигурации
 class CfmSelectConfig(QtGui.QMainWindow, Ui_fmSelectConfig):
   """ Окно выбора текущей конфигурации"""
 
+  #Инициализация формы
   def __init__(self,vCE):
     """ Инициализация окна выбора текущей конфигурации """
+    #Объявление глобальных словарей
     global vinstrD
     global cstateD
-
+    #Конструктор родительского класса
     super().__init__()      
     self.setupUi(self)
+    #Инициализация указателя на родительский класс
     self.vCE=vCE
- 
+    #Инициализация переменных
     self.fRec = False
     self.fFirstShow = True
-
+    #Проверка наличия раздела словаря состояния формы и его создание при отсутствии
     if 'CfmMain' in cstateD: 
       self.dictState = cstateD['CfmMain'] 
     else:
       self.dictState = {}
       cstateD['CfmMain'] = self.dictState 
-
+    #Соединение кнопок с соответствующими функциями
     self.tbSelectConf.clicked.connect(self.on_tbSelectConf_toggle)
     self.tbChangeConf.clicked.connect(self.on_tbChangeConf_toggle)
     self.tbDelConf.clicked.connect(self.on_tbDelConf_toggle)
@@ -513,16 +505,12 @@ class CfmSelectConfig(QtGui.QMainWindow, Ui_fmSelectConfig):
     self.tbTestModuls.clicked.connect(self.vCE.TestConfigsModuls)
     self.tbCreateConf.clicked.connect(self.on_tbCreateConf_toggle)
     self.lwConf.doubleClicked.connect(self.on_tbSelectConf_toggle)
-    #self.lwConf.clicked.connect(self.on_PreSelectConf_toggle)
     self.tbSetting.clicked.connect(self.on_tbSetting_toggle)
     self.tbLoadLastConfig.clicked.connect(self.on_tbLoadLastConfig_toggle)
     self.tbSettings.clicked.connect(self.on_tbSettings_toggle)
     self.tbCloseConfig.clicked.connect(self.on_tbCloseConfig_toggle)
-    #self.tbSetting.setVisible(False);
-    #self.tbSettings.setVisible(False);
-    #self.tbSetting.setEnabled(False);
-    #self.tbSettings.setEnabled(False);
-    
+
+  #Отображение окна
   def show(self):
     """ Отображение окна выбора текущей конфигурации """
     super().show()
@@ -540,19 +528,23 @@ class CfmSelectConfig(QtGui.QMainWindow, Ui_fmSelectConfig):
       if (y > dh):  y = dh - rect.height()
       self.vCE.InitConfigList()
       a=0
-      self.vCE.ModeFlag= self.vCE.Cfg1["Params"]["First"] 
+      #Проверка наличия ключа доступа к настройкам
+      First_exists=0
+      Params_exists = 'Params' in self.vCE.Cfg1
+      if Params_exists : First_exists= 'First' in self.vCE.Cfg1["Params"]
+      #Если нет или неверный, то доступ закрыт
+      if First_exists:
+          self.vCE.ModeFlag= self.vCE.Cfg1["Params"]["First"]
+      else: 
+          self.vCE.ModeFlag=0
       if(self.vCE.ModeFlag!='1917'):
-        self.tbSetting.setVisible(False)
-        self.tbSettings.setVisible(False)
         self.tbSetting.setEnabled(False)
         self.tbSettings.setEnabled(False)
       if(self.vCE.ModeFlag=='1917'):
-        self.tbSetting.setVisible(True)
-        self.tbSettings.setVisible(True)
         self.tbSetting.setEnabled(True)
         self.tbSettings.setEnabled(True)
       
-
+  #Кнопка загрузки выбранной конфигурации
   def on_tbSelectConf_toggle(self):
      """ Кнопка загрузки выбранной конфигурации """
      try:
@@ -2012,7 +2004,9 @@ class CConfigEditor:
     LL.exception('')
    tmpd=''
    try:
-     tmpd=self.CommonProfil_stateD['CurrCFG']['Descr']     
+     tmpd=""
+     key_exists = 'Descr' in self.CommonProfil_stateD['CurrCFG']
+     if key_exists: tmpd=self.CommonProfil_stateD['CurrCFG']['Descr']     
    except:
     LL.exception('')
    self.winCrConf.leConfDescr.setText(tmpd)
