@@ -998,7 +998,7 @@ class CfmIonSelect(QtGui.QMainWindow, Ui_fmIonSelect):
     self.twIonSelect.setColumnCount(5)
     self.twIonSelect.setRowCount(_row) 	
     while(m<=_row):
-        if PCFlag==2: self.twIonSelect.setRowHeight(m,5)								   
+        if PCFlag==2: self.twIonSelect.setRowHeight(m,50)								   
         n=0
         while(n<=4):
             if PCFlag==2: 	self.twIonSelect.setColumnWidth(n,125)								  

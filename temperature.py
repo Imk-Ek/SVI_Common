@@ -100,7 +100,7 @@ class CTemp(CVInstr):
       self.win.tbSaveToNotepad_.click()
       self.UpdateFlag=0				   
 
-    Results.Result_Dict[self.Name][self.OutputVal[0]]=self.tmpVal
+    #Results.Result_Dict[self.Name][self.OutputVal[0]]=self.tmpVal
     Results.Result_Dict[self.Name]['Параметр '+self.OutputVal[0]]='Температура'
     Results.Result_Dict[self.Name]['Единица '+self.OutputVal[0]]=self.Temp_ed
     if(Results.Result_Dict[self.Name]['В блокнот']!=2):Results.Result_Dict[self.Name]['В блокнот']=self.InLight_Notepad

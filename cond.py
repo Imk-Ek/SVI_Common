@@ -1913,6 +1913,8 @@ class CCond(CVInstr):
     self.tmpX_Set=0.0
     self.tmpX_sm_Set=0.0
     self.tmpKd_Set=0.0
+    self.tmpVal_Sm=1.0
+    #self.tmpX_=0
     self.techT=0
     self.KBand=1
     self.KSaltBand=1
